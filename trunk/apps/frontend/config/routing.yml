@@ -6,11 +6,39 @@ homepage:
   url:   /
   param: { module: default, action: index }
 
-# generic rules
-# please, remove them by adding more specific rules
-default_index:
-  url:   /:module
-  param: { action: index }
 
-default:
-  url:   /:module/:action/*
+#default
+default_index:
+  url:   /inicio
+  param: { module: default, action: index }
+  
+default_index_page:
+  url: /default/index/:page
+  param: { module: default, action: index }
+  requirements:
+  page: \d+ 
+  
+default_new:
+  url:   /nueva
+  param: { module: default, action: new }
+  
+  
+default_create:
+  url:   /crear
+  param: { module: default, action: create }  
+  
+default_edit:
+  url:   /editar
+  param: { module: default, action: edit }
+  
+default_update:
+  url:   /actualizar
+  param: { module: default, action: update }  
+  
+default_delete:
+  url:   /eliminar
+  param: { module: default, action: delete }
+
+default_show:
+  url:   /mostrar
+  param: { module: default, action: show }
