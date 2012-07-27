@@ -1,0 +1,1130 @@
+Contenido:
+  connection: doctrine
+  tableName: contenido
+  actAs:
+    Timestampable:
+  columns:
+    idUsuario:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    idCategoriaContenido:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    titulo:
+      type: string(255)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    contenido:
+      type: text()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    borrado:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "0"
+      autoincrement: false
+    activo:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "0"
+      autoincrement: false 
+  relations:
+    sfGuardUser:
+      local: idUsuario
+      foreign: id
+      type: one
+    CategoriaContenido:
+      local: idCategoriaContenido
+      foreign: id
+      type: one  
+      
+CategoriaContenido:
+  connection: doctrine
+  tableName: categoriaContenido
+  actAs:
+    Timestampable:
+  columns:
+    texto:
+      type: text()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    imagen:
+      type: string(255)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false  
+  relations:
+    Contenido:
+      local: id
+      foreign: idCategoriaContenido
+      type: many
+
+
+Contacto:
+  connection: doctrine
+  tableName: contacto
+  columns:
+    nombre:
+      type: string(100)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    email:
+      type: string(100)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    telefono:
+      type: string(20)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    empresa:
+      type: string(100)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    comentario:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    documento:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    borrado:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "0"
+      autoincrement: false   
+      
+      
+Comentario:
+  connection: doctrine
+  tableName: comentario
+  actAs:
+    Timestampable:
+  columns:
+    idUsuario:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false  
+    idUnidadTematica:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false        
+    publicacion:
+      type: text()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    archivo:
+      type: string(255)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false  
+    borrado:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "0"
+      autoincrement: false
+  relations:
+    sfGuardUser:
+      local: idUsuario
+      foreign: id
+      type: one     
+    UnidadTematica:
+      local: idUnidadTematica
+      foreign: id
+      type: one       
+      
+UnidadTematica:
+  connection: doctrine
+  tableName: unidadTematica
+  actAs:
+    Timestampable:
+  columns:
+    idUsuario:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    titulo:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    descripcion:
+      type: text()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    soloAccesoPremium:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "0"
+      autoincrement: false
+    soloAccesoLogado:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "0"
+      autoincrement: false   
+    borrado:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "0"
+      autoincrement: false       
+    activo:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "1"
+      autoincrement: false 
+  relations:
+    sfGuardUser:
+      local: idUsuario
+      foreign: id
+      type: one    
+    Episodio:
+      local: id
+      foreign: idUnidadTematica
+      type: many     
+    Comentario:
+      local: id
+      foreign: idUnidadTematica
+      type: many         
+      
+Episodio:
+  connection: doctrine
+  tableName: episodio
+  actAs:
+    Timestampable:
+  columns:
+    idUnidadTematica:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false    
+    titulo:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    descripcion:
+      type: text()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false      
+    enlaceVideo:
+      type: string(255)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false  
+    soloAccesoPremium:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "0"
+      autoincrement: false
+    soloAccesoLogado:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "0"
+      autoincrement: false         
+  relations:
+    UnidadTematica:
+      local: idUnidadTematica
+      foreign: id
+      type: one  
+    JuegoEpisodio:
+      local: id
+      foreign: idEpisodio
+      type: many    
+    ElExperto:
+      local: id
+      foreign: idEpisodio
+      type: many 
+    Capitulo:
+      local: id
+      foreign: idEpisodio
+      type: many      
+    ContenidoPadresYProfesores:
+      local: id
+      foreign: idEpisodio
+      type: many            
+      
+      
+JuegoEpisodio:
+  connection: doctrine
+  tableName: juegoEpisodio
+  actAs:
+    Timestampable:
+  columns:
+    idEpisodio:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false       
+    titulo:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    enlaceJuego:
+      type: string(255)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false      
+    descripcion:
+      type: text()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    soloAccesoPremium:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "0"
+      autoincrement: false
+    soloAccesoLogado:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "0"
+      autoincrement: false   
+    borrado:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "0"
+      autoincrement: false       
+    activo:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "1"
+      autoincrement: false 
+  relations:
+    Episodio:
+      local: idEpisodio
+      foreign: id
+      type: one     
+      
+ElExperto:
+  connection: doctrine
+  tableName: elExperto
+  actAs:
+    Timestampable:
+  columns:
+    idEpisodio:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false       
+    enlaceVideo:
+      type: string(255)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false      
+    descripcion:
+      type: text()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    soloAccesoPremium:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "0"
+      autoincrement: false
+    soloAccesoLogado:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "0"
+      autoincrement: false   
+    borrado:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "0"
+      autoincrement: false       
+    activo:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "1"
+      autoincrement: false 
+  relations:
+    Episodio:
+      local: idEpisodio
+      foreign: id
+      type: one       
+      
+Capitulo:
+  connection: doctrine
+  tableName: capitulo
+  actAs:
+    Timestampable:
+  columns:
+    idEpisodio:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false       
+    titulo:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false  
+    descripcion:
+      type: text()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    soloAccesoPremium:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "0"
+      autoincrement: false
+    soloAccesoLogado:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "0"
+      autoincrement: false   
+    borrado:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "0"
+      autoincrement: false       
+    activo:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "1"
+      autoincrement: false 
+  relations:
+    Episodio:
+      local: idEpisodio
+      foreign: id
+      type: one    
+    VideoCapitulo:
+      local: id
+      foreign: idCapitulo
+      type: many  
+    FotografiaCapitulo:
+      local: id
+      foreign: idCapitulo
+      type: many           
+      
+VideoCapitulo:
+  connection: doctrine
+  tableName: videoCapitulo
+  actAs:
+    Timestampable:
+  columns:
+    idCapitulo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false        
+    descripcion:
+      type: text()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    enlaceVideo:
+      type: string(255)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false        
+    soloAccesoPremium:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "0"
+      autoincrement: false
+    soloAccesoLogado:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "0"
+      autoincrement: false   
+    borrado:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "0"
+      autoincrement: false       
+    activo:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "1"
+      autoincrement: false 
+  relations:
+    Capitulo:
+      local: idCapitulo
+      foreign: id
+      type: one    
+      
+FotografiaCapitulo:
+  connection: doctrine
+  tableName: fotografiaCapitulo
+  actAs:
+    Timestampable:
+  columns:
+    idCapitulo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false        
+    descripcion:
+      type: text()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    fotografia:
+      type: string(255)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false        
+    soloAccesoPremium:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "0"
+      autoincrement: false
+    soloAccesoLogado:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "0"
+      autoincrement: false   
+    borrado:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "0"
+      autoincrement: false       
+    activo:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "1"
+      autoincrement: false 
+  relations:
+    Capitulo:
+      local: idCapitulo
+      foreign: id
+      type: one        
+      
+Producto:
+  connection: doctrine
+  tableName: producto
+  actAs:
+    Timestampable:
+  columns:
+    nombre:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    descripcion:
+      type: text()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    precio:
+      type: string(100)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false          
+    soloAccesoPremium:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "0"
+      autoincrement: false
+    soloAccesoLogado:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "0"
+      autoincrement: false   
+    borrado:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "0"
+      autoincrement: false       
+    activo:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "1"
+      autoincrement: false 
+  relations:
+    FotografiaProducto:
+      local: id
+      foreign: idProducto
+      type: many 
+      
+FotografiaProducto:
+  connection: doctrine
+  tableName: fotografiaProducto
+  actAs:
+    Timestampable:
+  columns:
+    idProducto:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false        
+    descripcion:
+      type: text()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    fotografia:
+      type: string(255)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false        
+    soloAccesoPremium:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "0"
+      autoincrement: false
+    soloAccesoLogado:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "0"
+      autoincrement: false   
+    borrado:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "0"
+      autoincrement: false       
+    activo:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "1"
+      autoincrement: false 
+  relations:
+    Producto:
+      local: idProducto
+      foreign: id
+      type: one        
+      
+ProgramaColegio:
+  connection: doctrine
+  tableName: programaColegio
+  actAs:
+    Timestampable:
+  columns:
+    titulo:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    descripcion:
+      type: text()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false     
+    soloAccesoPremium:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "0"
+      autoincrement: false
+    soloAccesoLogado:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "0"
+      autoincrement: false   
+    borrado:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "0"
+      autoincrement: false       
+    activo:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "1"
+      autoincrement: false 
+  relations:
+    FotografiaPrograma:
+      local: id
+      foreign: idProgramaColegio
+      type: many       
+      
+FotografiaProgramaColegio:
+  connection: doctrine
+  tableName: fotografiaProgramaColegio
+  actAs:
+    Timestampable:
+  columns:
+    idProgramaColegio:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false        
+    descripcion:
+      type: text()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    fotografia:
+      type: string(255)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false        
+    soloAccesoPremium:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "0"
+      autoincrement: false
+    soloAccesoLogado:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "0"
+      autoincrement: false   
+    borrado:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "0"
+      autoincrement: false       
+    activo:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "1"
+      autoincrement: false 
+  relations:
+    ProgramaColegio:
+      local: idProgramaColegio
+      foreign: id
+      type: one              
+      
+      
+ContenidoPadresYProfesores:
+  connection: doctrine
+  tableName: contenidoPadresYProfesores
+  actAs:
+    Timestampable:
+  columns:
+    idEpisodio:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false    
+    titulo:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    contenido:
+      type: text()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false      
+    enlaceVideo:
+      type: string(255)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false  
+    soloAccesoPremium:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "0"
+      autoincrement: false
+    soloAccesoLogado:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "0"
+      autoincrement: false   
+  relations:
+    Episodio:
+      local: idEpisodio
+      foreign: id
+      type: one        
+    FotografiaContenidoPadresYProfesores:
+      local: id
+      foreign: idContenidoPadresYProfesores
+      type: many      
+    VideoContenidoPadresYProfesores:
+      local: id
+      foreign: idContenidoPadresYProfesores
+      type: many     
+      
+FotografiaContenidoPadresYProfesores:
+  connection: doctrine
+  tableName: fotografiaContenidoPadresYProfesores
+  actAs:
+    Timestampable:
+  columns:
+    idContenidoPadresYProfesores:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false        
+    descripcion:
+      type: text()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    fotografia:
+      type: string(255)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false        
+    soloAccesoPremium:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "0"
+      autoincrement: false
+    soloAccesoLogado:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "0"
+      autoincrement: false   
+    borrado:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "0"
+      autoincrement: false       
+    activo:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "1"
+      autoincrement: false 
+  relations:
+    ContenidoPadresYProfesores:
+      local: idContenidoPadresYProfesores
+      foreign: id
+      type: one 
+      
+      
+VideoContenidoPadresYProfesores:
+  connection: doctrine
+  tableName: videoContenidoPadresYProfesores
+  actAs:
+    Timestampable:
+  columns:
+    idContenidoPadresYProfesores:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false        
+    descripcion:
+      type: text()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    enlaceVideo:
+      type: string(255)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false        
+    soloAccesoPremium:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "0"
+      autoincrement: false
+    soloAccesoLogado:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "0"
+      autoincrement: false   
+    borrado:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "0"
+      autoincrement: false       
+    activo:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "1"
+      autoincrement: false 
+  relations:
+    ContenidoPadresYProfesores::
+      local: idContenidoPadresYProfesores
+      foreign: id
+      type: one       
+      
