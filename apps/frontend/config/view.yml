@@ -6,15 +6,19 @@ default:
     content-type: text/html
 
   metas:
-    #title:        symfony project
-    #description:  symfony project
-    #keywords:     symfony, project
-    #language:     en
-    #robots:       index, follow
+    name:         Amina y el mundo
+    title:        El mundo de amina
+    description:  Asómate y échale un vistazo al mundo de Amina. Se parece bastante al nuestro, ¿verdad? Aunque hay alguna diferencia. Aquí las banderas no tienen colores. Tienen palabras. Una de ellas es respeto. Otra, solidaridad. Y otra más, integración. Si quieres las puedes colorear. A ella también le gusta pintarlas, pero siempre mezclando los colores. Así inventa tonalidades nuevas. Amina nació en el norte de África y acaba de venir a vivir a España con su familia. Todos ellos pensaban que iban a encontrar un mundo ideal lleno de oportunidades. Pero no es como habían imaginado. Tiene 10 años, ningún prejuicio y piensa que lo que une a las personas es mayor que lo que las separa. Como nos pasa un poco a todos, está descubriendo un mundo sin entender muchas cosas de las que ve.  Por eso estamos aquí para enseñarle lo que sabemos y a la vez para aprender de ella, poniendo en común nuestras experiencias.Este es un web show divulgativo sobre Educación en Valores dirigido a menores de 8 a 12 años. Gracias a una serie documental organizada en bases temáticas nos enfrentamos a distintas injusticias sociales donde a través del respeto y la pluralidad intentamos plantear soluciones.  Tu opinión es imprescindible en el debate. Para ello puedes participar enviándonos consejos, propuestas y tus propias historias.  Gracias a nuestro consejo de expertos,  recursos interactivos e infinidad de juegos incentivaremos nuestra  creatividad, el respeto al otro y la noción de diversidad que nos enriquece como miembros de una comunidad multicultural. Para construir este proyecto somos conscientes de que hacen falta muchas manos. Por ello a Amina le acompaña un equipo de más de 10 colaboradores que participan en este proyecto incentivando la reflexión, una actitud de cambio frente a la injusticia y el juego como formas de aprendizaje. El siguiente eres tú Tus padres y profesores también están invitados a participar  
+    keywords:     Amina, Amina y el mundo, el mundo de amina, las banderas no tienen colores, áfrica, nacio, inmigrar, inmigrante, mundo desconocido, valores, menores de 12 a 8 años, injusticia social, documental, aprendizaje, valores, educación, educacion
+    language:     es    
+    author:       Allel software free
+    organization: Amina y el mundo
+    locality:     Madrid, España    
+    robots:       index, follow
 
-  stylesheets:    [main.css]
+  stylesheets:    [jquery-ui-1.8.17.custom.css, main.css, /resources/css/jquery.toastmessage.css]
 
-  javascripts:    []
+  javascripts:    [jquery-1.7.2.min.js, jquery-ui-1.8.17.custom.min.js, tiny_mce/tiny_mce]
 
   has_layout:     true
   layout:         layout
