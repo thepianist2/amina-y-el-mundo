@@ -1,5 +1,7 @@
 <?php use_helper('I18N') ?>
-
+<div style="margin-left: 350px;">
+<div id="formulario">
+   <div id="formulario2">
 <form action="<?php echo url_for('@sf_guard_signin') ?>" method="post">
   <table>
     <tbody>
@@ -23,3 +25,6 @@
     </tfoot>
   </table>
 </form>
+ </div>
+</div>
+    </div>

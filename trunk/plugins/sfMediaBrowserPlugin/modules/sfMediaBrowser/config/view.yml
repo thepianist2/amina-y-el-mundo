@@ -1,0 +1,5 @@
+default:
+  components:
+    menu_izquierda:  [default, administracion] 
+    subMenu:  [default, subMenu]
+    
