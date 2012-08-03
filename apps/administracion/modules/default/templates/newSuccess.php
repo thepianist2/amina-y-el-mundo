@@ -1,3 +1,3 @@
-<h1>New Unidad tematica</h1>
+<h1>Nueva Unidad temática</h1>
 
 <?php include_partial('form', array('form' => $form)) ?>
