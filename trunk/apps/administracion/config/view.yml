@@ -12,9 +12,9 @@ default:
     #language:     en
     #robots:       index, follow
 
-  stylesheets:    [main.css]
+  stylesheets:    [administracion.css,jquery-ui-1.8.17.custom.css, /resources/css/jquery.toastmessage.css, ie.css, /sfMediaBrowserPlugin/css/list.css]
 
-  javascripts:    []
+  javascripts:    [jquery-1.7.2.min.js, jquery-ui-1.8.17.custom.min.js, tiny_mce/tiny_mce, administracion.js, jquery.toastmessage.js]
 
   has_layout:     true
   layout:         layout

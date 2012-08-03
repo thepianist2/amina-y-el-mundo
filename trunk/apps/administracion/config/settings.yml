@@ -24,8 +24,12 @@ test:
 
 all:
   .settings:
+
+    #texto tinymc
+    rich_text_js_dir:  js/tiny_mce    
     # Form security secret (CSRF protection)
     csrf_secret:            c424ef63e88a38d5e472af668f3f91e56da01caa
+    enabled_modules: [default, sfGuardAuth, sfGuardGroup, sfGuardPermission, sfGuardUser, sfMediaBrowser]
 
     # Output escaping settings
     escaping_strategy:      true
@@ -33,3 +37,18 @@ all:
 
     # Enable the database manager
     use_database:           true
+    
+    i18n:  true
+    default_culture:  es
+    
+    
+  .actions:
+
+    login_module:           sfGuardAuth
+    login_action:           signin
+
+    secure_module:          sfGuardAuth
+    secure_action:          secure
+
+    
+        

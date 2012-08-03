@@ -12,9 +12,44 @@ class defaultActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
   {
-    $this->unidad_tematicas = Doctrine_Core::getTable('UnidadTematica')
+    $q = Doctrine_Core::getTable('UnidadTematica')
       ->createQuery('a')
-      ->execute();
+      ->where('a.borrado = ?',0)
+      ->orderBy('a.created_at ASC');
+     
+        $this->unidad_tematicas = new sfDoctrinePager('UnidadTematica', 6);
+	$this->unidad_tematicas->setQuery($q);   	
+        $this->unidad_tematicas->setPage($this->getRequestParameter('page',1));
+	$this->unidad_tematicas->init();
+        //route del paginado
+        $this->action = '@default_index_page';       
+     
+  }
+  
+  
+  
+    public function executeBuscar(sfWebRequest $request)
+  {
+        
+        $query = $request->getParameter('query');
+       $q = Doctrine_Core::getTable('UnidadTematica')
+      ->createQuery('a')
+      ->where('a.titulo LIKE ?','%'.$query.'%')
+      ->where('a.descripcion LIKE ?','%'.$query.'%')     
+      ->andWhere('a.borrado = ?',0)
+      ->orderBy('a.created_at ASC'); 
+     
+        $this->unidad_tematicas = new sfDoctrinePager('UnidadTematica', 6);
+	$this->unidad_tematicas->setQuery($q);   	
+        $this->unidad_tematicas->setPage($this->getRequestParameter('page',1));
+	$this->unidad_tematicas->init();
+        //route del paginado
+         $this->action = 'default/buscar';
+        
+        $this->query = $query;
+        
+        $this->setTemplate('index');
+     
   }
 
   public function executeShow(sfWebRequest $request)
@@ -26,6 +61,7 @@ class defaultActions extends sfActions
   public function executeNew(sfWebRequest $request)
   {
     $this->form = new UnidadTematicaForm();
+    $this->form->setDefault('idUsuario', $this->getUser()->getGuardUser()->getId());
   }
 
   public function executeCreate(sfWebRequest $request)
@@ -33,6 +69,8 @@ class defaultActions extends sfActions
     $this->forward404Unless($request->isMethod(sfRequest::POST));
 
     $this->form = new UnidadTematicaForm();
+    
+    $this->form->setDefault('idUsuario', $this->getUser()->getGuardUser()->getId());
 
     $this->processForm($request, $this->form);
 
@@ -58,10 +96,13 @@ class defaultActions extends sfActions
 
   public function executeDelete(sfWebRequest $request)
   {
-    $request->checkCSRFProtection();
+//    $request->checkCSRFProtection();
 
     $this->forward404Unless($unidad_tematica = Doctrine_Core::getTable('UnidadTematica')->find(array($request->getParameter('id'))), sprintf('Object unidad_tematica does not exist (%s).', $request->getParameter('id')));
-    $unidad_tematica->delete();
+    $unidad_tematica->borrado=1;
+    $unidad_tematica->activo=0;
+    $unidad_tematica->save();
+    $this->getUser()->setFlash('mensajeSuceso','Unidad Temática eliminada.');
 
     $this->redirect('default/index');
   }
@@ -72,8 +113,33 @@ class defaultActions extends sfActions
     if ($form->isValid())
     {
       $unidad_tematica = $form->save();
+      $this->getUser()->setFlash('mensajeTerminado','Unidad Temática guardada.');
 
-      $this->redirect('default/edit?id='.$unidad_tematica->getId());
+      $this->redirect('default/index');
+    }else{
+      $this->getUser()->setFlash('mensajeErrorGrave','Porfavor, revise los campos marcados que faltan.');
+
     }
   }
+  
+  
+  public function executeSwitchValor(sfWebRequest $request){
+    $this->forward404Unless($unidad_tematica = Doctrine_Core::getTable('UnidadTematica')->find(array($request->getParameter('id'))), sprintf('Object unidad_tematica does not exist (%s).', $request->getParameter('id')));
+    if($request->getParameter('variable')=='activo'){
+        $unidad_tematica->activo=$request->getParameter('valor');
+    }
+    if($request->getParameter('variable')=='soloLogado'){
+        $unidad_tematica->soloAccesoLogado=$request->getParameter('valor');
+    }
+    if($request->getParameter('variable')=='soloPremium'){
+        $unidad_tematica->soloAccesoPremium=$request->getParameter('valor');
+    }
+    
+    $unidad_tematica->save();
+    
+//    $this->getUser()->setFlash('mensajeSuceso','Cambio realizado.');
+
+//        $this->redirect('default/index');
+    }
+  
 }

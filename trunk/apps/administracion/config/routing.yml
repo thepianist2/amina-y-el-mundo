@@ -6,6 +6,357 @@ homepage:
   url:   /
   param: { module: default, action: index }
 
+##default
+#default_index:
+#  url:   /inicio
+#  param: { module: default, action: index }
+#  
+default_index_page:
+  url: /default/index/:page
+  param: { module: default, action: index }
+  requirements:
+  page: \d+ 
+#  
+#default_new:
+#  url:   /nueva
+#  param: { module: default, action: new }
+#  
+#  
+#default_create:
+#  url:   /crear
+#  param: { module: default, action: create }  
+#  
+#default_edit:
+#  url:   /editar
+#  param: { module: default, action: edit }
+#  
+#default_update:
+#  url:   /actualizar
+#  param: { module: default, action: update }  
+#  
+#default_delete:
+#  url:   /eliminar
+#  param: { module: default, action: delete }
+#
+#default_show:
+#  url:   /mostrar
+#  param: { module: default, action: show }
+#  
+#default_addFavorito:
+#  url:   /addFavorito
+#  param: { module: default, action: addFavorito }  
+#  
+#default_buscar:
+#  url:   /buscar
+#  param: { module: default, action: buscar }   
+#  
+#
+#default_switchValor:
+#  url:   /cambiar
+#  param: { module: default, action: switchValor } 
+#
+#
+#
+#
+#
+#
+##episodio
+#episodio_index:
+#  url:   /episodios
+#  param: { module: episodio, action: index }
+#  
+episodio_index_page:
+  url: /episodios/index/:page
+  param: { module: episodio, action: index }
+  requirements:
+  page: \d+ 
+#  
+#episodio_new:
+#  url:   /nuevo-episodio
+#  param: { module: episodio, action: new }
+#  
+#  
+#episodio_create:
+#  url:   /crear-episodio
+#  param: { module: episodio, action: create }  
+#  
+#episodio_edit:
+#  url:   /editar-episodio
+#  param: { module: episodio, action: edit }
+#  
+#episodio_update:
+#  url:   /actualizar-episodio
+#  param: { module: episodio, action: update }  
+#  
+#episodio_delete:
+#  url:   /eliminar-episodio
+#  param: { module: episodio, action: delete }
+#
+#episodio_show:
+#  url:   /mostrar-episodio
+#  param: { module: episodio, action: show }
+#  
+#  
+#  
+##comentario
+#comentario_index:
+#  url:   /comentarios
+#  param: { module: comentario, action: index }
+#  
+#comentario_index_page:
+#  url: /comentario/index/:page
+#  param: { module: comentario, action: index }
+#  requirements:
+#  page: \d+ 
+#  
+#comentario_new:
+#  url:   /nuevo-comentario
+#  param: { module: comentario, action: new }
+#  
+#  
+#comentario_create:
+#  url:   /crear-comentario
+#  param: { module: comentario, action: create }  
+#  
+#comentario_edit:
+#  url:   /editar-comentario
+#  param: { module: comentario, action: edit }
+#  
+#comentario_update:
+#  url:   /actualizar-comentario
+#  param: { module: comentario, action: update }  
+#  
+#comentario_delete:
+#  url:   /eliminar-comentario
+#  param: { module: comentario, action: delete }
+#
+#comentario_show:
+#  url:   /mostrar-comentario
+#  param: { module: comentario, action: show }  
+#  
+#  
+##contenido
+#contenido_index:
+#  url:   /contenidos
+#  param: { module: contenido, action: index }
+#  
+contenido_index_page:
+  url: /contenido/index/:page
+  param: { module: contenido, action: index }
+  requirements:
+  page: \d+ 
+#  
+#contenido_new:
+#  url:   /nuevo-contenido
+#  param: { module: contenido, action: new }
+#  
+#  
+#contenido_create:
+#  url:   /crear-contenido
+#  param: { module: contenido, action: create }  
+#  
+#contenido_edit:
+#  url:   /editar-contenido
+#  param: { module: contenido, action: edit }
+#  
+#contenido_update:
+#  url:   /actualizar-contenido
+#  param: { module: contenido, action: update }  
+#  
+#contenido_delete:
+#  url:   /eliminar-contenido
+#  param: { module: contenido, action: delete }
+#
+#contenido_show:
+#  url:   /mostrar-contenido
+#  param: { module: contenido, action: show }    
+#  
+#  
+##programaColegio
+#programaColegio_index:
+#  url:   /programa-colegio
+#  param: { module: programaColegio, action: index }
+#  
+programaColegio_index_page:
+  url: /programa-colegio/index/:page
+  param: { module: programaColegio, action: index }
+  requirements:
+  page: \d+ 
+#  
+#programaColegio_new:
+#  url:   /nuevo-programa-colegio
+#  param: { module: programaColegio, action: new }
+#  
+#  
+#programaColegio_create:
+#  url:   /crear-programa-colegio
+#  param: { module: programaColegio, action: create }  
+#  
+#programaColegio_edit:
+#  url:   /editar-programa-colegio
+#  param: { module: programaColegio, action: edit }
+#  
+#programaColegio_update:
+#  url:   /actualizar-programa-colegio
+#  param: { module: programaColegio, action: update }  
+#  
+#programaColegio_delete:
+#  url:   /eliminar-programa-colegio
+#  param: { module: programaColegio, action: delete }
+#
+#programaColegio_show:
+#  url:   /mostrar-programa-colegio
+#  param: { module: programaColegio, action: show }    
+#  
+#  
+##contacto
+#contacto_index:
+#  url:   /contactos
+#  param: { module: contacto, action: index }
+#  
+contacto_index_page:
+  url: /contacto/index/:page
+  param: { module: contacto, action: index }
+  requirements:
+  page: \d+ 
+#  
+#contacto_new:
+#  url:   /nuevo-contacto
+#  param: { module: contacto, action: new }
+#  
+#  
+#contacto_create:
+#  url:   /crear-contacto
+#  param: { module: contacto, action: create }  
+#  
+#contacto_edit:
+#  url:   /editar-contacto
+#  param: { module: contacto, action: edit }
+#  
+#contacto_update:
+#  url:   /actualizar-contacto
+#  param: { module: contacto, action: update }  
+#  
+#contacto_delete:
+#  url:   /eliminar-contacto
+#  param: { module: contacto, action: delete }
+#
+#contacto_show:
+#  url:   /mostrar-contacto
+#  param: { module: contacto, action: show }      
+#  
+#  
+##usuario
+#usuario_index:
+#  url:   /usuarios
+#  param: { module: usuario, action: index }
+#  
+usuario_index_page:
+  url: /usuario/index/:page
+  param: { module: usuario, action: index }
+  requirements:
+  page: \d+ 
+#  
+#usuario_new:
+#  url:   /nuevo-usuario
+#  param: { module: usuario, action: new }
+#  
+#  
+#usuario_create:
+#  url:   /crear-usuario
+#  param: { module: usuario, action: create }  
+#  
+#usuario_edit:
+#  url:   /editar-usuario
+#  param: { module: usuario, action: edit }
+#  
+#usuario_update:
+#  url:   /actualizar-usuario
+#  param: { module: usuario, action: update }  
+#  
+#usuario_delete:
+#  url:   /eliminar-usuario
+#  param: { module: usuario, action: delete }
+#
+#usuario_show:
+#  url:   /mostrar-usuario
+#  param: { module: usuario, action: show }     
+#  
+#  
+##producto
+#producto_index:
+#  url:   /productos
+#  param: { module: producto, action: index }
+#  
+producto_index_page:
+  url: /producto/index/:page
+  param: { module: producto, action: index }
+  requirements:
+  page: \d+ 
+#  
+#producto_new:
+#  url:   /nuevo-producto
+#  param: { module: producto, action: new }
+#  
+#  
+#producto_create:
+#  url:   /crear-producto
+#  param: { module: producto, action: create }  
+#  
+#producto_edit:
+#  url:   /editar-producto
+#  param: { module: producto, action: edit }
+#  
+#producto_update:
+#  url:   /actualizar-producto
+#  param: { module: producto, action: update }  
+#  
+#producto_delete:
+#  url:   /eliminar-producto
+#  param: { module: producto, action: delete }
+#
+#producto_show:
+#  url:   /mostrar-producto
+#  param: { module: producto, action: show }  
+#  
+#  
+##configuracion
+#configuracion_index:
+#  url:   /configuraciones
+#  param: { module: configuracion, action: index }
+#  
+configuracion_index_page:
+  url: /configuracion/index/:page
+  param: { module: configuracion, action: index }
+  requirements:
+  page: \d+ 
+#  
+#configuracion_new:
+#  url:   /nueva-configuracion
+#  param: { module: configuracion, action: new }
+#  
+#  
+#configuracion_create:
+#  url:   /crear-configuracion
+#  param: { module: configuracion, action: create }  
+#  
+#configuracion_edit:
+#  url:   /editar-configuracion
+#  param: { module: configuracion, action: edit }
+#  
+#configuracion_update:
+#  url:   /actualizar-configuracion
+#  param: { module: configuracion, action: update }  
+#  
+#configuracion_delete:
+#  url:   /eliminar-configuracion
+#  param: { module: configuracion, action: delete }
+#
+#configuracion_show:
+#  url:   /mostrar-configuracion
+#  param: { module: configuracion, action: show }     
+#  
+  
 # generic rules
 # please, remove them by adding more specific rules
 default_index:

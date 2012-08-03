@@ -9,6 +9,41 @@
     <?php include_javascripts() ?>
   </head>
   <body>
-    <?php echo $sf_content ?>
+    <div id="contenedor">
+        <?php include_partial('bloque/bloqueMensaje'); ?>
+        <div id="header">
+	     <div id="header1" style="height: 100px;">
+                 <a style="margin-left: 85px; margin-top: -16px;" href="<?php echo url_for('homepage') ?>"><?php echo image_tag('administracion/logo.png') ?></a>
+	     </div>
+	</div> <!-- fin header -->
+        
+	<div id="cuerpo">
+            <div id="contenidoadmin">
+                <?php if($sf_user->isAuthenticated()){ ?>
+        	<div id="principal-left-admin">
+		  		<div id="menu_izquierda">
+                                    
+		    	<?php include_component('default', 'menuLateral') ?>
+                                    
+		  		</div>
+	  		</div>
+                <?php }else{ ?>
+                
+                <?php echo $sf_content ?>
+                <?php } ?>
+                <?php if($sf_user->isAuthenticated()){ ?>
+	  		<div id="principal-right-admin">
+	  			<div id="derecha" >
+	    		<?php echo $sf_content ?>
+	    		</div>
+	    	</div>
+                <?php } ?>
+                <div class="clear"></div>
+            </div> <!-- fin contenido -->
+	</div>  <!-- fin cuerpo -->
+        
+   <div class="clear"></div>
+   </div>  <!-- fin contenedor -->
+   
   </body>
 </html>
