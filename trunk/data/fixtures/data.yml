@@ -1,0 +1,51 @@
+UnidadTematica:
+  UnidadTematica_1:
+    idUsuario: '1'
+    titulo: 'Primera unidad tematica'
+    descripcion: descripcion
+    soloAccesoPremium: true
+    soloAccesoLogado: true
+    borrado: false
+    activo: true
+    created_at: '2012-07-30 14:27:47'
+    updated_at: '2012-07-30 14:27:47'
+  UnidadTematica_2:
+    idUsuario: '1'
+    titulo: 'segunda unidad tematica'
+    descripcion: 'segunda unidad descripcion'
+    soloAccesoPremium: false
+    soloAccesoLogado: true
+    borrado: false
+    activo: true
+    created_at: '2012-07-30 14:28:05'
+    updated_at: '2012-07-30 14:28:05'
+  UnidadTematica_3:
+    idUsuario: '1'
+    titulo: 'tercera unidad tematica'
+    descripcion: 'tercera lkasdjkladsklasd'
+    soloAccesoPremium: true
+    soloAccesoLogado: false
+    borrado: false
+    activo: true
+    created_at: '2012-07-30 14:28:46'
+    updated_at: '2012-07-30 14:28:46'
+  UnidadTematica_4:
+    idUsuario: '1'
+    titulo: 'cuartta unidad tematica'
+    descripcion: 'descripcion cuarta unidad tematica'
+    soloAccesoPremium: false
+    soloAccesoLogado: false
+    borrado: false
+    activo: true
+    created_at: '2012-07-30 14:29:05'
+    updated_at: '2012-07-30 14:29:05'
+  UnidadTematica_5:
+    idUsuario: '1'
+    titulo: caca
+    descripcion: dasads
+    soloAccesoPremium: true
+    soloAccesoLogado: true
+    borrado: false
+    activo: true
+    created_at: '2012-07-30 14:32:39'
+    updated_at: '2012-07-30 14:32:39'
