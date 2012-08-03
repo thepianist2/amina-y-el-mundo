@@ -1128,3 +1128,40 @@ VideoContenidoPadresYProfesores:
       foreign: id
       type: one       
       
+Configuracion:
+  connection: doctrine
+  tableName: configuracion
+  columns:
+    variable:
+      type: string(255)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    valor:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    descripcion:
+      type: blob()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    tipo:
+      type: enum(8)
+      fixed: false
+      unsigned: false
+      values:
+        - imagen
+        - variable
+        - mensaje
+      primary: false
+      notnull: true
+      autoincrement: false
+      
