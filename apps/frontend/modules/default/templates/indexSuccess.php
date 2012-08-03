@@ -1,10 +1,8 @@
-<h1>Unidad tematicas List</h1>
+<h1>Unidades temáticas</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Id</th>
-      <th>Id usuario</th>
       <th>Titulo</th>
       <th>Descripcion</th>
       <th>Solo acceso premium</th>
@@ -18,9 +16,7 @@
   <tbody>
     <?php foreach ($unidad_tematicas as $unidad_tematica): ?>
     <tr>
-      <td><a href="<?php echo url_for('default/show?id='.$unidad_tematica->getId()) ?>"><?php echo $unidad_tematica->getId() ?></a></td>
-      <td><?php echo $unidad_tematica->getIdUsuario() ?></td>
-      <td><?php echo $unidad_tematica->getTitulo() ?></td>
+      <td><a href="<?php echo url_for('default/show?id='.$unidad_tematica->getId()) ?>"><?php echo $unidad_tematica->getTitulo() ?></a></td>
       <td><?php echo $unidad_tematica->getDescripcion() ?></td>
       <td><?php echo $unidad_tematica->getSoloAccesoPremium() ?></td>
       <td><?php echo $unidad_tematica->getSoloAccesoLogado() ?></td>
@@ -33,4 +29,4 @@
   </tbody>
 </table>
 
-  <a href="<?php echo url_for('default/new') ?>">New</a>
+  <a href="<?php echo url_for('default/new') ?>">Nueva</a>
