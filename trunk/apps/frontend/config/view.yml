@@ -16,7 +16,7 @@ default:
     locality:     Madrid, España    
     robots:       index, follow
 
-  stylesheets:    [jquery-ui-1.8.17.custom.css, main.css, /resources/css/jquery.toastmessage.css]
+  stylesheets:    [jquery-ui-1.8.17.custom.css, main.css, /resources/css/jquery.toastmessage.css, ie.css]
 
   javascripts:    [jquery-1.7.2.min.js, jquery-ui-1.8.17.custom.min.js, tiny_mce/tiny_mce]
 

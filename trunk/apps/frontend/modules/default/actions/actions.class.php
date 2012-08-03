@@ -73,7 +73,7 @@ class defaultActions extends sfActions
     {
       $unidad_tematica = $form->save();
 
-      $this->redirect('default/edit?id='.$unidad_tematica->getId());
+      $this->redirect('default/index');
     }
   }
 }
