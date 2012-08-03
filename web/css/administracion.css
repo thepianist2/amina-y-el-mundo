@@ -995,11 +995,11 @@ float: left;
 
 table {width: 100%; }
 td, th { padding: 7px; }
-input { border: 1px solid #08088A; color: #666; padding: 3px; }
+input { border: 1px solid #08088A; color: black; padding: 3px; }
 .clear { clear: both; }
 
 #formulario2 input, #formulario2 label { display: block; }
-#formulario2 label { font-size: 13px; font-weight: bold; color: #444; }
+#formulario2 label { font-size: 13px; font-weight: bold; color: #151515; }
 #formulario2 input { font-size: 15px; padding: 5px; margin: 7px auto 11px auto; }
 
 #contenedor { margin: 0 auto; width: 1018px; }
@@ -1184,6 +1184,8 @@ a.boton {
 	margin-left: 0px;
 }
 
+submit{color: red;}
+
 /****Fin Acciones *****/
 
 /******** paginador ********/
@@ -1253,9 +1255,9 @@ a.boton {
 
 #formulario #formulario2
 {
-    background-color: white;
+    background-color: #36ff60;
     margin: 0 auto;
-    width: 300px;
+    width: 330px;
     margin-top:15px;
     padding: 10px;
     border: 1px solid #08088A;
