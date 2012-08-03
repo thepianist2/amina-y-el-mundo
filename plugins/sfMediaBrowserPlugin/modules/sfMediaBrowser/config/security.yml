@@ -1,0 +1,4 @@
+all:
+  is_secure:   on        # Only for authenticated users
+  
+
