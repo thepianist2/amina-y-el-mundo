@@ -53,6 +53,9 @@ sfGuardGroupPermission:
 sfGuardUser:
   actAs: [Timestampable]
   columns:
+    imagenPerfil:
+      type: string(255)
+      notnull: false      
     first_name: string(255)
     last_name: string(255)
     email_address:
@@ -68,13 +71,23 @@ sfGuardUser:
       default: sha1
       notnull: true
     salt: string(128)
-    password: string(128)
-    esPremiun:
+    password:
+      type: string(128)
+      notnull: true
+    esPremium:
       type: boolean
       default: 0    
     is_active:
       type: boolean
       default: 1
+    borrado:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "0"
+      autoincrement: false      
     is_super_admin:
       type: boolean
       default: false
