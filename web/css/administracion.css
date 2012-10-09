@@ -192,9 +192,9 @@ body {
 	padding: 0px;
 
 	height:100%;
-/*        background: url('../images/administracion/bg_body.png') repeat-x #FFF;*/
+        background: url('../images/administracion/bg_body.jpg') repeat;
 
-        background-color: #E0E6F8;
+/*        background-color: #E0E6F8;*/
 
 }
 
@@ -1255,7 +1255,8 @@ submit{color: red;}
 
 #formulario #formulario2
 {
-    background-color: #36ff60;
+/*    background-color: #36ff60;*/
+    background-image: url(../images/administracion/login-box-backg.png);
     margin: 0 auto;
     width: 330px;
     margin-top:15px;
@@ -1266,3 +1267,10 @@ submit{color: red;}
 }
 
 /**************************** fin cajon login ***************************/
+
+
+#imagenPerfil{
+    max-width: 200px;
+    max-width: 200px;
+    padding: 15px;
+}
