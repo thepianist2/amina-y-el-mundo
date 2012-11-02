@@ -30,7 +30,7 @@ abstract class BaseElExpertoForm extends BaseFormDoctrine
     $this->setValidators(array(
       'id'                => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
       'idEpisodio'        => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Episodio'))),
-      'enlaceVideo'       => new sfValidatorString(array('max_length' => 255)),
+      'enlaceVideo'       => new sfValidatorPass(),
       'descripcion'       => new sfValidatorPass(),
       'soloAccesoPremium' => new sfValidatorBoolean(array('required' => false)),
       'soloAccesoLogado'  => new sfValidatorBoolean(array('required' => false)),

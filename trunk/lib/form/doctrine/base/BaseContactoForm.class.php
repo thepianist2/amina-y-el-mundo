@@ -23,6 +23,8 @@ abstract class BaseContactoForm extends BaseFormDoctrine
       'comentario' => new sfWidgetFormTextarea(),
       'documento'  => new sfWidgetFormTextarea(),
       'borrado'    => new sfWidgetFormInputCheckbox(),
+      'created_at' => new sfWidgetFormDateTime(),
+      'updated_at' => new sfWidgetFormDateTime(),
     ));
 
     $this->setValidators(array(
@@ -31,9 +33,11 @@ abstract class BaseContactoForm extends BaseFormDoctrine
       'email'      => new sfValidatorString(array('max_length' => 100)),
       'telefono'   => new sfValidatorString(array('max_length' => 20, 'required' => false)),
       'empresa'    => new sfValidatorString(array('max_length' => 100, 'required' => false)),
-      'comentario' => new sfValidatorString(array('required' => false)),
+      'comentario' => new sfValidatorString(),
       'documento'  => new sfValidatorString(array('required' => false)),
       'borrado'    => new sfValidatorBoolean(array('required' => false)),
+      'created_at' => new sfValidatorDateTime(),
+      'updated_at' => new sfValidatorDateTime(),
     ));
 
     $this->widgetSchema->setNameFormat('contacto[%s]');

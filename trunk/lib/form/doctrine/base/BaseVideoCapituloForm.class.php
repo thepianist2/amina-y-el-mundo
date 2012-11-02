@@ -31,7 +31,7 @@ abstract class BaseVideoCapituloForm extends BaseFormDoctrine
       'id'                => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
       'idCapitulo'        => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Capitulo'))),
       'descripcion'       => new sfValidatorPass(),
-      'enlaceVideo'       => new sfValidatorString(array('max_length' => 255)),
+      'enlaceVideo'       => new sfValidatorPass(),
       'soloAccesoPremium' => new sfValidatorBoolean(array('required' => false)),
       'soloAccesoLogado'  => new sfValidatorBoolean(array('required' => false)),
       'borrado'           => new sfValidatorBoolean(array('required' => false)),
