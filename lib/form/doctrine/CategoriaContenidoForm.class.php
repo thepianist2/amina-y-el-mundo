@@ -12,5 +12,17 @@ class CategoriaContenidoForm extends BaseCategoriaContenidoForm
 {
   public function configure()
   {
+                                                                  //quitar campos que no usaremos
+      unset($this['created_at'], $this['updated_at'], $this['borrado'], $this['activo'], $this['imagen']);
+      
+      $this->setWidget('texto', new sfWidgetFormInputText(array(), array('size' =>50))); 
+      $this->setValidator('texto',new sfValidatorString(array('required' => true)));     
+                           $this->widgetSchema->setLabels(array(
+  'texto'   => 'Nombre *',
+
+));
+                           
+   $this->validatorSchema['texto']->setMessages(array('required' => 'Campo Obligatorio.','invalid' => 'Campo inválido'));
+
   }
 }

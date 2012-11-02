@@ -16,6 +16,7 @@ abstract class BasesfGuardUserForm extends BaseFormDoctrine
   {
     $this->setWidgets(array(
       'id'               => new sfWidgetFormInputHidden(),
+      'imagenPerfil'     => new sfWidgetFormInputText(),
       'first_name'       => new sfWidgetFormInputText(),
       'last_name'        => new sfWidgetFormInputText(),
       'email_address'    => new sfWidgetFormInputText(),
@@ -23,8 +24,9 @@ abstract class BasesfGuardUserForm extends BaseFormDoctrine
       'algorithm'        => new sfWidgetFormInputText(),
       'salt'             => new sfWidgetFormInputText(),
       'password'         => new sfWidgetFormInputText(),
-      'esPremiun'        => new sfWidgetFormInputCheckbox(),
+      'esPremium'        => new sfWidgetFormInputCheckbox(),
       'is_active'        => new sfWidgetFormInputCheckbox(),
+      'borrado'          => new sfWidgetFormInputCheckbox(),
       'is_super_admin'   => new sfWidgetFormInputCheckbox(),
       'last_login'       => new sfWidgetFormDateTime(),
       'created_at'       => new sfWidgetFormDateTime(),
@@ -35,15 +37,17 @@ abstract class BasesfGuardUserForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'id'               => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
+      'imagenPerfil'     => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'first_name'       => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'last_name'        => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'email_address'    => new sfValidatorString(array('max_length' => 255)),
       'username'         => new sfValidatorString(array('max_length' => 128)),
       'algorithm'        => new sfValidatorString(array('max_length' => 128, 'required' => false)),
       'salt'             => new sfValidatorString(array('max_length' => 128, 'required' => false)),
-      'password'         => new sfValidatorString(array('max_length' => 128, 'required' => false)),
-      'esPremiun'        => new sfValidatorBoolean(array('required' => false)),
+      'password'         => new sfValidatorString(array('max_length' => 128)),
+      'esPremium'        => new sfValidatorBoolean(array('required' => false)),
       'is_active'        => new sfValidatorBoolean(array('required' => false)),
+      'borrado'          => new sfValidatorBoolean(array('required' => false)),
       'is_super_admin'   => new sfValidatorBoolean(array('required' => false)),
       'last_login'       => new sfValidatorDateTime(array('required' => false)),
       'created_at'       => new sfValidatorDateTime(),

@@ -15,25 +15,31 @@ abstract class BaseComentarioForm extends BaseFormDoctrine
   public function setup()
   {
     $this->setWidgets(array(
-      'id'               => new sfWidgetFormInputHidden(),
-      'idUsuario'        => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('sfGuardUser'), 'add_empty' => false)),
-      'idUnidadTematica' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('UnidadTematica'), 'add_empty' => false)),
-      'publicacion'      => new sfWidgetFormInputText(),
-      'archivo'          => new sfWidgetFormInputText(),
-      'borrado'          => new sfWidgetFormInputCheckbox(),
-      'created_at'       => new sfWidgetFormDateTime(),
-      'updated_at'       => new sfWidgetFormDateTime(),
+      'id'                => new sfWidgetFormInputHidden(),
+      'idUsuario'         => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('sfGuardUser'), 'add_empty' => false)),
+      'idUnidadTematica'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('UnidadTematica'), 'add_empty' => false)),
+      'publicacion'       => new sfWidgetFormInputText(),
+      'archivo'           => new sfWidgetFormInputText(),
+      'soloAccesoPremium' => new sfWidgetFormInputCheckbox(),
+      'soloAccesoLogado'  => new sfWidgetFormInputCheckbox(),
+      'borrado'           => new sfWidgetFormInputCheckbox(),
+      'activo'            => new sfWidgetFormInputCheckbox(),
+      'created_at'        => new sfWidgetFormDateTime(),
+      'updated_at'        => new sfWidgetFormDateTime(),
     ));
 
     $this->setValidators(array(
-      'id'               => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
-      'idUsuario'        => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('sfGuardUser'))),
-      'idUnidadTematica' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('UnidadTematica'))),
-      'publicacion'      => new sfValidatorPass(),
-      'archivo'          => new sfValidatorString(array('max_length' => 255)),
-      'borrado'          => new sfValidatorBoolean(array('required' => false)),
-      'created_at'       => new sfValidatorDateTime(),
-      'updated_at'       => new sfValidatorDateTime(),
+      'id'                => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
+      'idUsuario'         => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('sfGuardUser'))),
+      'idUnidadTematica'  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('UnidadTematica'))),
+      'publicacion'       => new sfValidatorPass(),
+      'archivo'           => new sfValidatorString(array('max_length' => 255)),
+      'soloAccesoPremium' => new sfValidatorBoolean(array('required' => false)),
+      'soloAccesoLogado'  => new sfValidatorBoolean(array('required' => false)),
+      'borrado'           => new sfValidatorBoolean(array('required' => false)),
+      'activo'            => new sfValidatorBoolean(array('required' => false)),
+      'created_at'        => new sfValidatorDateTime(),
+      'updated_at'        => new sfValidatorDateTime(),
     ));
 
     $this->widgetSchema->setNameFormat('comentario[%s]');

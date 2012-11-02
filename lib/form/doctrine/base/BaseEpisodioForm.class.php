@@ -22,6 +22,8 @@ abstract class BaseEpisodioForm extends BaseFormDoctrine
       'enlaceVideo'       => new sfWidgetFormInputText(),
       'soloAccesoPremium' => new sfWidgetFormInputCheckbox(),
       'soloAccesoLogado'  => new sfWidgetFormInputCheckbox(),
+      'borrado'           => new sfWidgetFormInputCheckbox(),
+      'activo'            => new sfWidgetFormInputCheckbox(),
       'created_at'        => new sfWidgetFormDateTime(),
       'updated_at'        => new sfWidgetFormDateTime(),
     ));
@@ -31,9 +33,11 @@ abstract class BaseEpisodioForm extends BaseFormDoctrine
       'idUnidadTematica'  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('UnidadTematica'))),
       'titulo'            => new sfValidatorString(array('max_length' => 150)),
       'descripcion'       => new sfValidatorPass(),
-      'enlaceVideo'       => new sfValidatorString(array('max_length' => 255, 'required' => false)),
+      'enlaceVideo'       => new sfValidatorPass(array('required' => false)),
       'soloAccesoPremium' => new sfValidatorBoolean(array('required' => false)),
       'soloAccesoLogado'  => new sfValidatorBoolean(array('required' => false)),
+      'borrado'           => new sfValidatorBoolean(array('required' => false)),
+      'activo'            => new sfValidatorBoolean(array('required' => false)),
       'created_at'        => new sfValidatorDateTime(),
       'updated_at'        => new sfValidatorDateTime(),
     ));
