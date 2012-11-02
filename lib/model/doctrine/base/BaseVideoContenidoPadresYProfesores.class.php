@@ -9,7 +9,7 @@ Doctrine_Manager::getInstance()->bindComponent('VideoContenidoPadresYProfesores'
  * 
  * @property integer $idContenidoPadresYProfesores
  * @property text $descripcion
- * @property string $enlaceVideo
+ * @property text $enlaceVideo
  * @property boolean $soloAccesoPremium
  * @property boolean $soloAccesoLogado
  * @property boolean $borrado
@@ -18,7 +18,7 @@ Doctrine_Manager::getInstance()->bindComponent('VideoContenidoPadresYProfesores'
  * 
  * @method integer                         getIdContenidoPadresYProfesores() Returns the current record's "idContenidoPadresYProfesores" value
  * @method text                            getDescripcion()                  Returns the current record's "descripcion" value
- * @method string                          getEnlaceVideo()                  Returns the current record's "enlaceVideo" value
+ * @method text                            getEnlaceVideo()                  Returns the current record's "enlaceVideo" value
  * @method boolean                         getSoloAccesoPremium()            Returns the current record's "soloAccesoPremium" value
  * @method boolean                         getSoloAccesoLogado()             Returns the current record's "soloAccesoLogado" value
  * @method boolean                         getBorrado()                      Returns the current record's "borrado" value
@@ -61,14 +61,14 @@ abstract class BaseVideoContenidoPadresYProfesores extends sfDoctrineRecord
              'autoincrement' => false,
              'length' => '',
              ));
-        $this->hasColumn('enlaceVideo', 'string', 255, array(
-             'type' => 'string',
+        $this->hasColumn('enlaceVideo', 'text', null, array(
+             'type' => 'text',
              'fixed' => 0,
              'unsigned' => false,
              'primary' => false,
              'notnull' => true,
              'autoincrement' => false,
-             'length' => 255,
+             'length' => '',
              ));
         $this->hasColumn('soloAccesoPremium', 'boolean', null, array(
              'type' => 'boolean',

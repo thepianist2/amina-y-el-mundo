@@ -10,9 +10,11 @@ Doctrine_Manager::getInstance()->bindComponent('Episodio', 'doctrine');
  * @property integer $idUnidadTematica
  * @property string $titulo
  * @property text $descripcion
- * @property string $enlaceVideo
+ * @property text $enlaceVideo
  * @property boolean $soloAccesoPremium
  * @property boolean $soloAccesoLogado
+ * @property boolean $borrado
+ * @property boolean $activo
  * @property UnidadTematica $UnidadTematica
  * @property Doctrine_Collection $JuegoEpisodio
  * @property Doctrine_Collection $ElExperto
@@ -22,9 +24,11 @@ Doctrine_Manager::getInstance()->bindComponent('Episodio', 'doctrine');
  * @method integer             getIdUnidadTematica()           Returns the current record's "idUnidadTematica" value
  * @method string              getTitulo()                     Returns the current record's "titulo" value
  * @method text                getDescripcion()                Returns the current record's "descripcion" value
- * @method string              getEnlaceVideo()                Returns the current record's "enlaceVideo" value
+ * @method text                getEnlaceVideo()                Returns the current record's "enlaceVideo" value
  * @method boolean             getSoloAccesoPremium()          Returns the current record's "soloAccesoPremium" value
  * @method boolean             getSoloAccesoLogado()           Returns the current record's "soloAccesoLogado" value
+ * @method boolean             getBorrado()                    Returns the current record's "borrado" value
+ * @method boolean             getActivo()                     Returns the current record's "activo" value
  * @method UnidadTematica      getUnidadTematica()             Returns the current record's "UnidadTematica" value
  * @method Doctrine_Collection getJuegoEpisodio()              Returns the current record's "JuegoEpisodio" collection
  * @method Doctrine_Collection getElExperto()                  Returns the current record's "ElExperto" collection
@@ -36,6 +40,8 @@ Doctrine_Manager::getInstance()->bindComponent('Episodio', 'doctrine');
  * @method Episodio            setEnlaceVideo()                Sets the current record's "enlaceVideo" value
  * @method Episodio            setSoloAccesoPremium()          Sets the current record's "soloAccesoPremium" value
  * @method Episodio            setSoloAccesoLogado()           Sets the current record's "soloAccesoLogado" value
+ * @method Episodio            setBorrado()                    Sets the current record's "borrado" value
+ * @method Episodio            setActivo()                     Sets the current record's "activo" value
  * @method Episodio            setUnidadTematica()             Sets the current record's "UnidadTematica" value
  * @method Episodio            setJuegoEpisodio()              Sets the current record's "JuegoEpisodio" collection
  * @method Episodio            setElExperto()                  Sets the current record's "ElExperto" collection
@@ -79,14 +85,14 @@ abstract class BaseEpisodio extends sfDoctrineRecord
              'autoincrement' => false,
              'length' => '',
              ));
-        $this->hasColumn('enlaceVideo', 'string', 255, array(
-             'type' => 'string',
+        $this->hasColumn('enlaceVideo', 'text', null, array(
+             'type' => 'text',
              'fixed' => 0,
              'unsigned' => false,
              'primary' => false,
              'notnull' => false,
              'autoincrement' => false,
-             'length' => 255,
+             'length' => '',
              ));
         $this->hasColumn('soloAccesoPremium', 'boolean', null, array(
              'type' => 'boolean',
@@ -105,6 +111,26 @@ abstract class BaseEpisodio extends sfDoctrineRecord
              'primary' => false,
              'notnull' => true,
              'default' => '0',
+             'autoincrement' => false,
+             'length' => '',
+             ));
+        $this->hasColumn('borrado', 'boolean', null, array(
+             'type' => 'boolean',
+             'fixed' => 0,
+             'unsigned' => false,
+             'primary' => false,
+             'notnull' => true,
+             'default' => '0',
+             'autoincrement' => false,
+             'length' => '',
+             ));
+        $this->hasColumn('activo', 'boolean', null, array(
+             'type' => 'boolean',
+             'fixed' => 0,
+             'unsigned' => false,
+             'primary' => false,
+             'notnull' => true,
+             'default' => '1',
              'autoincrement' => false,
              'length' => '',
              ));

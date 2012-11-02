@@ -95,7 +95,7 @@ abstract class BaseContenido extends sfDoctrineRecord
              'unsigned' => false,
              'primary' => false,
              'notnull' => true,
-             'default' => '0',
+             'default' => '1',
              'autoincrement' => false,
              'length' => '',
              ));

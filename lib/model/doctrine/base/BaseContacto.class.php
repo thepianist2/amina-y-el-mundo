@@ -81,7 +81,7 @@ abstract class BaseContacto extends sfDoctrineRecord
              'fixed' => 0,
              'unsigned' => false,
              'primary' => false,
-             'notnull' => false,
+             'notnull' => true,
              'autoincrement' => false,
              'length' => '',
              ));
@@ -109,6 +109,7 @@ abstract class BaseContacto extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        
+        $timestampable0 = new Doctrine_Template_Timestampable();
+        $this->actAs($timestampable0);
     }
 }

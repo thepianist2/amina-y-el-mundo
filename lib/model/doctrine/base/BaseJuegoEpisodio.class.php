@@ -9,7 +9,7 @@ Doctrine_Manager::getInstance()->bindComponent('JuegoEpisodio', 'doctrine');
  * 
  * @property integer $idEpisodio
  * @property string $titulo
- * @property string $enlaceJuego
+ * @property string $archivoFlash
  * @property text $descripcion
  * @property boolean $soloAccesoPremium
  * @property boolean $soloAccesoLogado
@@ -19,7 +19,7 @@ Doctrine_Manager::getInstance()->bindComponent('JuegoEpisodio', 'doctrine');
  * 
  * @method integer       getIdEpisodio()        Returns the current record's "idEpisodio" value
  * @method string        getTitulo()            Returns the current record's "titulo" value
- * @method string        getEnlaceJuego()       Returns the current record's "enlaceJuego" value
+ * @method string        getArchivoFlash()      Returns the current record's "archivoFlash" value
  * @method text          getDescripcion()       Returns the current record's "descripcion" value
  * @method boolean       getSoloAccesoPremium() Returns the current record's "soloAccesoPremium" value
  * @method boolean       getSoloAccesoLogado()  Returns the current record's "soloAccesoLogado" value
@@ -28,7 +28,7 @@ Doctrine_Manager::getInstance()->bindComponent('JuegoEpisodio', 'doctrine');
  * @method Episodio      getEpisodio()          Returns the current record's "Episodio" value
  * @method JuegoEpisodio setIdEpisodio()        Sets the current record's "idEpisodio" value
  * @method JuegoEpisodio setTitulo()            Sets the current record's "titulo" value
- * @method JuegoEpisodio setEnlaceJuego()       Sets the current record's "enlaceJuego" value
+ * @method JuegoEpisodio setArchivoFlash()      Sets the current record's "archivoFlash" value
  * @method JuegoEpisodio setDescripcion()       Sets the current record's "descripcion" value
  * @method JuegoEpisodio setSoloAccesoPremium() Sets the current record's "soloAccesoPremium" value
  * @method JuegoEpisodio setSoloAccesoLogado()  Sets the current record's "soloAccesoLogado" value
@@ -64,7 +64,7 @@ abstract class BaseJuegoEpisodio extends sfDoctrineRecord
              'autoincrement' => false,
              'length' => 150,
              ));
-        $this->hasColumn('enlaceJuego', 'string', 255, array(
+        $this->hasColumn('archivoFlash', 'string', 255, array(
              'type' => 'string',
              'fixed' => 0,
              'unsigned' => false,

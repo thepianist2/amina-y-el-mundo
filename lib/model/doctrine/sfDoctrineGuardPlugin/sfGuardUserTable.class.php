@@ -16,4 +16,71 @@ class sfGuardUserTable extends PluginsfGuardUserTable
     {
         return Doctrine_Core::getTable('sfGuardUser');
     }
+    
+    
+    public function verificarExisteEmail($email){
+        $q = Doctrine_Query::create()
+	            ->select('u.*')
+	            ->from('sfGuardUser u')
+                     ->where('u.email_address LIKE ?',$email);
+
+	   $u=$q->fetchOne();
+	     if ($u) {
+                 //si ya esta en la base de datos
+	 		return true;
+	     }else{
+                 //si no esta en la base de datos
+	 		return false;
+             }
+         }
+         
+             public function getByEmail($email){
+        $q = Doctrine_Query::create()
+	            ->select('u.*')
+	            ->from('sfGuardUser u')
+                     ->where('u.email_address LIKE ?',$email);
+
+	   $u=$q->fetchOne();
+	     if ($u) {
+                 //si ya esta en la base de datos
+	 		return $u;
+	     }else{
+                 //si no esta en la base de datos
+	 		return false;
+             }
+         }
+         
+         
+       public function verificarExisteUserName($userName){
+        $q = Doctrine_Query::create()
+	            ->select('u.*')
+	            ->from('sfGuardUser u')
+                     ->where('u.username LIKE ?',$userName);
+
+	   $u=$q->fetchOne();
+	     if ($u) {
+                 //si ya esta en la base de datos
+	 		return true;
+	     }else{
+                 //si no esta en la base de datos
+	 		return false;
+             }
+         }
+         
+         
+      public function getByUserName($userName){
+        $q = Doctrine_Query::create()
+	            ->select('u.*')
+	            ->from('sfGuardUser u')
+                     ->where('u.username LIKE ?',$userName);
+
+	   $u=$q->fetchOne();
+	     if ($u) {
+                 //si ya esta en la base de datos
+	 		return $u;
+	     }else{
+                 //si no esta en la base de datos
+	 		return false;
+             }
+         }
 }
