@@ -15,7 +15,7 @@ abstract class BaseJuegoEpisodioFormFilter extends BaseFormFilterDoctrine
     $this->setWidgets(array(
       'idEpisodio'        => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Episodio'), 'add_empty' => true)),
       'titulo'            => new sfWidgetFormFilterInput(array('with_empty' => false)),
-      'enlaceJuego'       => new sfWidgetFormFilterInput(array('with_empty' => false)),
+      'archivoFlash'      => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'descripcion'       => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'soloAccesoPremium' => new sfWidgetFormChoice(array('choices' => array('' => 'yes or no', 1 => 'yes', 0 => 'no'))),
       'soloAccesoLogado'  => new sfWidgetFormChoice(array('choices' => array('' => 'yes or no', 1 => 'yes', 0 => 'no'))),
@@ -28,7 +28,7 @@ abstract class BaseJuegoEpisodioFormFilter extends BaseFormFilterDoctrine
     $this->setValidators(array(
       'idEpisodio'        => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Episodio'), 'column' => 'id')),
       'titulo'            => new sfValidatorPass(array('required' => false)),
-      'enlaceJuego'       => new sfValidatorPass(array('required' => false)),
+      'archivoFlash'      => new sfValidatorPass(array('required' => false)),
       'descripcion'       => new sfValidatorPass(array('required' => false)),
       'soloAccesoPremium' => new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))),
       'soloAccesoLogado'  => new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))),
@@ -58,7 +58,7 @@ abstract class BaseJuegoEpisodioFormFilter extends BaseFormFilterDoctrine
       'id'                => 'Number',
       'idEpisodio'        => 'ForeignKey',
       'titulo'            => 'Text',
-      'enlaceJuego'       => 'Text',
+      'archivoFlash'      => 'Text',
       'descripcion'       => 'Text',
       'soloAccesoPremium' => 'Boolean',
       'soloAccesoLogado'  => 'Boolean',
