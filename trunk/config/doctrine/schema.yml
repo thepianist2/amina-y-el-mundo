@@ -46,7 +46,7 @@ Contenido:
       unsigned: false
       primary: false
       notnull: true
-      default: "0"
+      default: "1"
       autoincrement: false 
   relations:
     sfGuardUser:
@@ -88,6 +88,8 @@ CategoriaContenido:
 Contacto:
   connection: doctrine
   tableName: contacto
+  actAs:
+    Timestampable:  
   columns:
     nombre:
       type: string(100)
@@ -122,7 +124,7 @@ Contacto:
       fixed: false
       unsigned: false
       primary: false
-      notnull: false
+      notnull: true
       autoincrement: false
     documento:
       type: string()
@@ -175,7 +177,7 @@ Comentario:
       primary: false
       notnull: true
       autoincrement: false  
-    borrado:
+    soloAccesoPremium:
       type: boolean()
       fixed: false
       unsigned: false
@@ -183,6 +185,30 @@ Comentario:
       notnull: true
       default: "0"
       autoincrement: false
+    soloAccesoLogado:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "0"
+      autoincrement: false   
+    borrado:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "0"
+      autoincrement: false       
+    activo:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "1"
+      autoincrement: false 
   relations:
     sfGuardUser:
       local: idUsuario
@@ -294,7 +320,7 @@ Episodio:
       notnull: true
       autoincrement: false      
     enlaceVideo:
-      type: string(255)
+      type: text()
       fixed: false
       unsigned: false
       primary: false
@@ -315,7 +341,23 @@ Episodio:
       primary: false
       notnull: true
       default: "0"
-      autoincrement: false         
+      autoincrement: false  
+    borrado:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "0"
+      autoincrement: false       
+    activo:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "1"
+      autoincrement: false       
   relations:
     UnidadTematica:
       local: idUnidadTematica
@@ -359,13 +401,13 @@ JuegoEpisodio:
       primary: false
       notnull: true
       autoincrement: false
-    enlaceJuego:
+    archivoFlash:
       type: string(255)
       fixed: false
       unsigned: false
       primary: false
       notnull: true
-      autoincrement: false      
+      autoincrement: false       
     descripcion:
       type: text()
       fixed: false
@@ -425,7 +467,7 @@ ElExperto:
       notnull: true
       autoincrement: false       
     enlaceVideo:
-      type: string(255)
+      type: text()
       fixed: false
       unsigned: false
       primary: false
@@ -570,7 +612,7 @@ VideoCapitulo:
       notnull: true
       autoincrement: false
     enlaceVideo:
-      type: string(255)
+      type: text()
       fixed: false
       unsigned: false
       primary: false
@@ -961,7 +1003,7 @@ ContenidoPadresYProfesores:
       notnull: true
       autoincrement: false      
     enlaceVideo:
-      type: string(255)
+      type: text()
       fixed: false
       unsigned: false
       primary: false
@@ -983,6 +1025,22 @@ ContenidoPadresYProfesores:
       notnull: true
       default: "0"
       autoincrement: false   
+    borrado:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "0"
+      autoincrement: false
+    activo:
+      type: boolean()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      default: "0"
+      autoincrement: false       
   relations:
     Episodio:
       local: idEpisodio
@@ -1084,7 +1142,7 @@ VideoContenidoPadresYProfesores:
       notnull: true
       autoincrement: false
     enlaceVideo:
-      type: string(255)
+      type: text()
       fixed: false
       unsigned: false
       primary: false
@@ -1131,20 +1189,22 @@ VideoContenidoPadresYProfesores:
 Configuracion:
   connection: doctrine
   tableName: configuracion
+  actAs:
+    Timestampable:  
   columns:
     variable:
       type: string(255)
       fixed: false
       unsigned: false
       primary: false
-      notnull: false
+      notnull: true
       autoincrement: false
     valor:
       type: string()
       fixed: false
       unsigned: false
       primary: false
-      notnull: false
+      notnull: true
       autoincrement: false
     descripcion:
       type: blob()
