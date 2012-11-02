@@ -16,4 +16,44 @@ class CategoriaContenidoTable extends Doctrine_Table
     {
         return Doctrine_Core::getTable('CategoriaContenido');
     }
+    
+    
+                      public function getLista() {	     
+          
+    $q = Doctrine_Query::create()
+    ->select('t.id, t.texto')
+    ->from('CategoriaContenido t')
+    ->orderBy('t.texto DESC');
+       $q->fetchArray();
+       
+  $resultados=$q->fetchArray();
+	     if (!$resultados) {
+	     	return false;
+	     }
+	     else {
+	     	foreach ($resultados as $resultado) {
+	     		$retorno[$resultado['id']]=$resultado['texto'];
+	     	}
+	     	
+	     	return $retorno;
+	     } 
+   }
+   
+          public function verificarExisteNombreCategoria($Nombrecategoria){
+        $q = Doctrine_Query::create()
+	            ->select('u.*')
+	            ->from('CategoriaContenido u')
+                     ->where('u.texto LIKE ?',$Nombrecategoria);
+
+	   $u=$q->fetchOne();
+	     if ($u) {
+                 //si ya esta en la base de datos
+	 		return true;
+	     }else{
+                 //si no esta en la base de datos
+	 		return false;
+             }
+         }
+    
+    
 }

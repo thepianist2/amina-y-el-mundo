@@ -16,4 +16,60 @@ class UnidadTematicaTable extends Doctrine_Table
     {
         return Doctrine_Core::getTable('UnidadTematica');
     }
+    
+    
+    
+    public function getEpisodios($idUnidadTematica){
+           $query = Doctrine_Core::getTable('Episodio')      
+      ->createQuery('a')
+      ->where('a.idUnidadTematica =?',$idUnidadTematica)             
+      ->andWhere('a.borrado = false');
+
+            return $query->execute();
+    }
+    
+        public function getAllEpisodios(){
+           $query = Doctrine_Core::getTable('Episodio')      
+      ->createQuery('a')           
+      ->andWhere('a.borrado = false');
+
+            return $query->execute();
+    }
+    
+    
+        
+    public function getComentarios($idUnidadTematica){
+           $query = Doctrine_Core::getTable('Comentario')      
+      ->createQuery('a')
+      ->where('a.idUnidadTematica =?',$idUnidadTematica)             
+      ->andWhere('a.borrado = false');
+
+            return $query->execute();
+    }
+    
+    
+              public function getLista() {	     
+          
+    $q = Doctrine_Query::create()
+    ->select('t.id, t.titulo')
+    ->from('UnidadTematica t')
+    ->where('t.borrado = ?', '0')
+    ->orderBy('t.titulo DESC');
+       $q->fetchArray();
+       
+  $resultados=$q->fetchArray();
+	     if (!$resultados) {
+	     	return false;
+	     }
+	     else {
+	     	foreach ($resultados as $resultado) {
+	     		$retorno[$resultado['id']]=$resultado['titulo'];
+	     	}
+	     	
+	     	return $retorno;
+	     }
+	     	
+  
+}
+
 }

@@ -16,4 +16,13 @@ class ContenidoPadresYProfesoresTable extends Doctrine_Table
     {
         return Doctrine_Core::getTable('ContenidoPadresYProfesores');
     }
+    
+         public function getFotografias($idContenido){
+           $query = Doctrine_Core::getTable('FotografiaContenidoPadresYProfesores')      
+      ->createQuery('a')
+      ->where('a.idContenidoPadresYProfesores =?',$idContenido)             
+      ->andWhere('a.borrado = false');
+
+            return $query->execute();
+    }
 }

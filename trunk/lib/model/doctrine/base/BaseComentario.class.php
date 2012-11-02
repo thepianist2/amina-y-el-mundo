@@ -11,24 +11,33 @@ Doctrine_Manager::getInstance()->bindComponent('Comentario', 'doctrine');
  * @property integer $idUnidadTematica
  * @property text $publicacion
  * @property string $archivo
+ * @property boolean $soloAccesoPremium
+ * @property boolean $soloAccesoLogado
  * @property boolean $borrado
+ * @property boolean $activo
  * @property sfGuardUser $sfGuardUser
  * @property UnidadTematica $UnidadTematica
  * 
- * @method integer        getIdUsuario()        Returns the current record's "idUsuario" value
- * @method integer        getIdUnidadTematica() Returns the current record's "idUnidadTematica" value
- * @method text           getPublicacion()      Returns the current record's "publicacion" value
- * @method string         getArchivo()          Returns the current record's "archivo" value
- * @method boolean        getBorrado()          Returns the current record's "borrado" value
- * @method sfGuardUser    getSfGuardUser()      Returns the current record's "sfGuardUser" value
- * @method UnidadTematica getUnidadTematica()   Returns the current record's "UnidadTematica" value
- * @method Comentario     setIdUsuario()        Sets the current record's "idUsuario" value
- * @method Comentario     setIdUnidadTematica() Sets the current record's "idUnidadTematica" value
- * @method Comentario     setPublicacion()      Sets the current record's "publicacion" value
- * @method Comentario     setArchivo()          Sets the current record's "archivo" value
- * @method Comentario     setBorrado()          Sets the current record's "borrado" value
- * @method Comentario     setSfGuardUser()      Sets the current record's "sfGuardUser" value
- * @method Comentario     setUnidadTematica()   Sets the current record's "UnidadTematica" value
+ * @method integer        getIdUsuario()         Returns the current record's "idUsuario" value
+ * @method integer        getIdUnidadTematica()  Returns the current record's "idUnidadTematica" value
+ * @method text           getPublicacion()       Returns the current record's "publicacion" value
+ * @method string         getArchivo()           Returns the current record's "archivo" value
+ * @method boolean        getSoloAccesoPremium() Returns the current record's "soloAccesoPremium" value
+ * @method boolean        getSoloAccesoLogado()  Returns the current record's "soloAccesoLogado" value
+ * @method boolean        getBorrado()           Returns the current record's "borrado" value
+ * @method boolean        getActivo()            Returns the current record's "activo" value
+ * @method sfGuardUser    getSfGuardUser()       Returns the current record's "sfGuardUser" value
+ * @method UnidadTematica getUnidadTematica()    Returns the current record's "UnidadTematica" value
+ * @method Comentario     setIdUsuario()         Sets the current record's "idUsuario" value
+ * @method Comentario     setIdUnidadTematica()  Sets the current record's "idUnidadTematica" value
+ * @method Comentario     setPublicacion()       Sets the current record's "publicacion" value
+ * @method Comentario     setArchivo()           Sets the current record's "archivo" value
+ * @method Comentario     setSoloAccesoPremium() Sets the current record's "soloAccesoPremium" value
+ * @method Comentario     setSoloAccesoLogado()  Sets the current record's "soloAccesoLogado" value
+ * @method Comentario     setBorrado()           Sets the current record's "borrado" value
+ * @method Comentario     setActivo()            Sets the current record's "activo" value
+ * @method Comentario     setSfGuardUser()       Sets the current record's "sfGuardUser" value
+ * @method Comentario     setUnidadTematica()    Sets the current record's "UnidadTematica" value
  * 
  * @package    amina
  * @subpackage model
@@ -76,6 +85,26 @@ abstract class BaseComentario extends sfDoctrineRecord
              'autoincrement' => false,
              'length' => 255,
              ));
+        $this->hasColumn('soloAccesoPremium', 'boolean', null, array(
+             'type' => 'boolean',
+             'fixed' => 0,
+             'unsigned' => false,
+             'primary' => false,
+             'notnull' => true,
+             'default' => '0',
+             'autoincrement' => false,
+             'length' => '',
+             ));
+        $this->hasColumn('soloAccesoLogado', 'boolean', null, array(
+             'type' => 'boolean',
+             'fixed' => 0,
+             'unsigned' => false,
+             'primary' => false,
+             'notnull' => true,
+             'default' => '0',
+             'autoincrement' => false,
+             'length' => '',
+             ));
         $this->hasColumn('borrado', 'boolean', null, array(
              'type' => 'boolean',
              'fixed' => 0,
@@ -83,6 +112,16 @@ abstract class BaseComentario extends sfDoctrineRecord
              'primary' => false,
              'notnull' => true,
              'default' => '0',
+             'autoincrement' => false,
+             'length' => '',
+             ));
+        $this->hasColumn('activo', 'boolean', null, array(
+             'type' => 'boolean',
+             'fixed' => 0,
+             'unsigned' => false,
+             'primary' => false,
+             'notnull' => true,
+             'default' => '1',
              'autoincrement' => false,
              'length' => '',
              ));

@@ -10,9 +10,11 @@ Doctrine_Manager::getInstance()->bindComponent('ContenidoPadresYProfesores', 'do
  * @property integer $idEpisodio
  * @property string $titulo
  * @property text $contenido
- * @property string $enlaceVideo
+ * @property text $enlaceVideo
  * @property boolean $soloAccesoPremium
  * @property boolean $soloAccesoLogado
+ * @property boolean $borrado
+ * @property boolean $activo
  * @property Episodio $Episodio
  * @property Doctrine_Collection $FotografiaContenidoPadresYProfesores
  * @property Doctrine_Collection $VideoContenidoPadresYProfesores
@@ -20,9 +22,11 @@ Doctrine_Manager::getInstance()->bindComponent('ContenidoPadresYProfesores', 'do
  * @method integer                    getIdEpisodio()                           Returns the current record's "idEpisodio" value
  * @method string                     getTitulo()                               Returns the current record's "titulo" value
  * @method text                       getContenido()                            Returns the current record's "contenido" value
- * @method string                     getEnlaceVideo()                          Returns the current record's "enlaceVideo" value
+ * @method text                       getEnlaceVideo()                          Returns the current record's "enlaceVideo" value
  * @method boolean                    getSoloAccesoPremium()                    Returns the current record's "soloAccesoPremium" value
  * @method boolean                    getSoloAccesoLogado()                     Returns the current record's "soloAccesoLogado" value
+ * @method boolean                    getBorrado()                              Returns the current record's "borrado" value
+ * @method boolean                    getActivo()                               Returns the current record's "activo" value
  * @method Episodio                   getEpisodio()                             Returns the current record's "Episodio" value
  * @method Doctrine_Collection        getFotografiaContenidoPadresYProfesores() Returns the current record's "FotografiaContenidoPadresYProfesores" collection
  * @method Doctrine_Collection        getVideoContenidoPadresYProfesores()      Returns the current record's "VideoContenidoPadresYProfesores" collection
@@ -32,6 +36,8 @@ Doctrine_Manager::getInstance()->bindComponent('ContenidoPadresYProfesores', 'do
  * @method ContenidoPadresYProfesores setEnlaceVideo()                          Sets the current record's "enlaceVideo" value
  * @method ContenidoPadresYProfesores setSoloAccesoPremium()                    Sets the current record's "soloAccesoPremium" value
  * @method ContenidoPadresYProfesores setSoloAccesoLogado()                     Sets the current record's "soloAccesoLogado" value
+ * @method ContenidoPadresYProfesores setBorrado()                              Sets the current record's "borrado" value
+ * @method ContenidoPadresYProfesores setActivo()                               Sets the current record's "activo" value
  * @method ContenidoPadresYProfesores setEpisodio()                             Sets the current record's "Episodio" value
  * @method ContenidoPadresYProfesores setFotografiaContenidoPadresYProfesores() Sets the current record's "FotografiaContenidoPadresYProfesores" collection
  * @method ContenidoPadresYProfesores setVideoContenidoPadresYProfesores()      Sets the current record's "VideoContenidoPadresYProfesores" collection
@@ -73,14 +79,14 @@ abstract class BaseContenidoPadresYProfesores extends sfDoctrineRecord
              'autoincrement' => false,
              'length' => '',
              ));
-        $this->hasColumn('enlaceVideo', 'string', 255, array(
-             'type' => 'string',
+        $this->hasColumn('enlaceVideo', 'text', null, array(
+             'type' => 'text',
              'fixed' => 0,
              'unsigned' => false,
              'primary' => false,
              'notnull' => false,
              'autoincrement' => false,
-             'length' => 255,
+             'length' => '',
              ));
         $this->hasColumn('soloAccesoPremium', 'boolean', null, array(
              'type' => 'boolean',
@@ -93,6 +99,26 @@ abstract class BaseContenidoPadresYProfesores extends sfDoctrineRecord
              'length' => '',
              ));
         $this->hasColumn('soloAccesoLogado', 'boolean', null, array(
+             'type' => 'boolean',
+             'fixed' => 0,
+             'unsigned' => false,
+             'primary' => false,
+             'notnull' => true,
+             'default' => '0',
+             'autoincrement' => false,
+             'length' => '',
+             ));
+        $this->hasColumn('borrado', 'boolean', null, array(
+             'type' => 'boolean',
+             'fixed' => 0,
+             'unsigned' => false,
+             'primary' => false,
+             'notnull' => true,
+             'default' => '0',
+             'autoincrement' => false,
+             'length' => '',
+             ));
+        $this->hasColumn('activo', 'boolean', null, array(
              'type' => 'boolean',
              'fixed' => 0,
              'unsigned' => false,
