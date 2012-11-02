@@ -12,14 +12,84 @@ class juegoEpisodioActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
   {
-    $this->juego_episodios = Doctrine_Core::getTable('JuegoEpisodio')
+    if($request->hasParameter('idEpisodio')){
+       $this->getUser()->setAttribute('idEpisodio', $request->getParameter('idEpisodio'));
+        }
+             //si se pasa el id episodio se muestran algunos no todos
+    if($request->hasParameter('idEpisodio') or $this->getUser()->hasAttribute('idEpisodio')){ 
+        $q = Doctrine_Core::getTable('JuegoEpisodio')
       ->createQuery('a')
-      ->execute();
+      ->where('a.borrado = ?',0)
+      ->andWhere('a.idEpisodio = ?',$this->getUser()->getAttribute('idEpisodio'))            
+      ->orderBy('a.created_at DESC');
+        
+      $this->episodio = Doctrine_Core::getTable('Episodio')->find($this->getUser()->getAttribute('idEpisodio'));
+     }else{
+      $q = Doctrine_Core::getTable('JuegoEpisodio')
+      ->createQuery('a')
+      ->where('a.borrado = ?',0)
+      ->orderBy('a.created_at DESC');              
+        }
+        
+
+        $this->juego_episodios = new sfDoctrinePager('JuegoEpisodio', 6);
+	$this->juego_episodios->setQuery($q);   	
+        $this->juego_episodios->setPage($this->getRequestParameter('page',1));
+	$this->juego_episodios->init();
+        //route del paginado
+        $this->action = '@juegoEpisodio_index_page';  
+  }
+  
+  
+  
+      public function executeIndexTodos(sfWebRequest $request)
+  {
+       $this->getUser()->setAttribute('idEpisodio',null);
+        
+
+      $q = Doctrine_Core::getTable('JuegoEpisodio')
+      ->createQuery('a')
+      ->where('a.borrado = ?',0)
+      ->orderBy('a.created_at ASC');              
+
+        
+
+        $this->juego_episodios = new sfDoctrinePager('JuegoEpisodio', 6);
+	$this->juego_episodios->setQuery($q);   	
+        $this->juego_episodios->setPage($this->getRequestParameter('page',1));
+	$this->juego_episodios->init();
+        //route del paginado
+        $this->action = '@juegoEpisodio_index_page';  
+        
+        $this->setTemplate('index');
+  }
+  
+      public function executeNewSinIdEpisodio(sfWebRequest $request)
+  {
+      $this->form = new JuegoEpisodioForm2();
+  }
+  
+      public function executeCreate2(sfWebRequest $request)
+  {
+    $this->forward404Unless($request->isMethod(sfRequest::POST));
+
+    $this->form = new JuegoEpisodioForm2();
+
+    $this->processForm($request, $this->form);
+
+    $this->setTemplate('newSinIdEpisodio');
   }
 
   public function executeNew(sfWebRequest $request)
   {
     $this->form = new JuegoEpisodioForm();
+    $this->form->setDefault('idEpisodio', $this->getUser()->getAttribute('idEpisodio'));
+  }
+  
+      public function executeShow(sfWebRequest $request)
+  {
+    $this->juego_episodio = Doctrine_Core::getTable('JuegoEpisodio')->find(array($request->getParameter('id')));
+    $this->forward404Unless($this->juego_episodio);
   }
 
   public function executeCreate(sfWebRequest $request)
@@ -27,6 +97,7 @@ class juegoEpisodioActions extends sfActions
     $this->forward404Unless($request->isMethod(sfRequest::POST));
 
     $this->form = new JuegoEpisodioForm();
+    $this->form->setDefault('idEpisodio', $this->getUser()->getAttribute('idEpisodio'));
 
     $this->processForm($request, $this->form);
 
@@ -52,10 +123,11 @@ class juegoEpisodioActions extends sfActions
 
   public function executeDelete(sfWebRequest $request)
   {
-    $request->checkCSRFProtection();
-
     $this->forward404Unless($juego_episodio = Doctrine_Core::getTable('JuegoEpisodio')->find(array($request->getParameter('id'))), sprintf('Object juego_episodio does not exist (%s).', $request->getParameter('id')));
-    $juego_episodio->delete();
+    $juego_episodio->borrado=1;
+    $juego_episodio->activo=0;
+    $juego_episodio->save();
+    $this->getUser()->setFlash('mensajeSuceso','Juego eliminado.');
 
     $this->redirect('juegoEpisodio/index');
   }
@@ -66,8 +138,59 @@ class juegoEpisodioActions extends sfActions
     if ($form->isValid())
     {
       $juego_episodio = $form->save();
+      $this->getUser()->setFlash('mensajeTerminado','Juego Guardado.');
 
-      $this->redirect('juegoEpisodio/edit?id='.$juego_episodio->getId());
+      $this->redirect('juegoEpisodio/index?idEpisodio='.$juego_episodio->getIdEpisodio());
+    }else{
+      $this->getUser()->setFlash('mensajeErrorGrave','Porfavor, revise los campos marcados que faltan.');
+
     }
   }
+  
+    
+      public function executeBuscar(sfWebRequest $request)
+  {
+                $query = $request->getParameter('query');
+          if($this->getUser()->hasAttribute('idEpisodio')){
+
+       $q = Doctrine_Core::getTable('JuegoEpisodio')
+      ->createQuery('a')
+      ->where('a.borrado = 0 AND a.idEpisodio = '.$this->getUser()->getAttribute('idEpisodio').' AND a.titulo LIKE ?','%'.$query.'%')
+      ->orWhere('a.borrado = 0 AND a.idEpisodio = '.$this->getUser()->getAttribute('idEpisodio').' AND a.descripcion LIKE ?','%'.$query.'%')                
+      ->orderBy('a.created_at ASC'); 
+          }else{
+             $q = Doctrine_Core::getTable('JuegoEpisodio')
+      ->createQuery('a')
+      ->where('a.borrado = 0 AND a.titulo LIKE ?','%'.$query.'%')
+      ->orWhere('a.borrado = 0 AND a.descripcion LIKE ?','%'.$query.'%') 
+      ->orderBy('a.created_at ASC');         
+          }
+        $this->juego_episodios = new sfDoctrinePager('JuegoEpisodio', 6);
+	$this->juego_episodios->setQuery($q);   	
+        $this->juego_episodios->setPage($this->getRequestParameter('page',1));
+	$this->juego_episodios->init();
+        //route del paginado
+         $this->action = 'juegoEpisodio/buscar';
+        
+        $this->query = $query;
+        
+        $this->setTemplate('index');
+  }
+  
+  
+    public function executeSwitchValor(sfWebRequest $request){
+    $this->forward404Unless($juego_episodio = Doctrine_Core::getTable('JuegoEpisodio')->find(array($request->getParameter('id'))), sprintf('Object juego_episodio does not exist (%s).', $request->getParameter('id')));
+    if($request->getParameter('variable')=='activo'){
+        $juego_episodio->activo=$request->getParameter('valor');
+    }
+    if($request->getParameter('variable')=='soloLogado'){
+        $juego_episodio->soloAccesoLogado=$request->getParameter('valor');
+    }
+    if($request->getParameter('variable')=='soloPremium'){
+        $juego_episodio->soloAccesoPremium=$request->getParameter('valor');
+    }
+    
+    $juego_episodio->save();
+    
+    }
 }

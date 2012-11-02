@@ -13,12 +13,11 @@
 <table class="listado contenido">
   <thead>
     <tr>
-      <th>Titulo</th>
+      <th>Título</th>
       <th>Solo acceso premium</th>
       <th>Solo acceso logado</th>
       <th>Activa</th>
       <th>Creado en</th>
-      <th>Última modificación</th>
       <th>Episodios</th>
       <th>Comentarios</th>
       <th colspan="3"><?php echo 'Acciones'?></th>            
@@ -123,9 +122,8 @@
 				?>
       </td>
       <td><?php echo format_date($unidad_tematica->getCreatedAt(), 'p') ?></td>
-      <td><?php echo format_date($unidad_tematica->getUpdatedAt(), 'p') ?></td>
-      <td><a href="<?php echo url_for('episodio/index?id='.$unidad_tematica->getId()) ?>"><?php echo  count($unidad_tematica->getEpisodio());  ?></a></td>
-      <td><a href="<?php echo url_for('comentario/index?id='.$unidad_tematica->getId()) ?>"><?php echo count($unidad_tematica->getComentario()); ?></a></td>
+      <td><a href="<?php echo url_for('episodio/index?idUnidad='.$unidad_tematica->getId()) ?>"><?php echo  count(Doctrine_Core::getTable('UnidadTematica')->getEpisodios($unidad_tematica->id));  ?></a></td>
+      <td><a href="<?php echo url_for('comentario/index?idUnidad='.$unidad_tematica->getId()) ?>"><?php echo count(Doctrine_Core::getTable('UnidadTematica')->getComentarios($unidad_tematica->id)); ?></a></td>
 
       <td class="accionListado"><a class="ver" id="<?php echo $unidad_tematica->id ?>" href="javascript:void()"><img  title="Vista previa" alt="Vista previa" src="/images/iconos/vistaPrevia.png"></img></a></td>
       <td class="accionListado"><?php echo link_to(image_tag('iconos/editar.png', array('alt' => 'Editar Contenido', 'title' => 'Editar Contenido')), 'default/edit?id='.$unidad_tematica->id) ?>                 

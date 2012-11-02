@@ -21,7 +21,7 @@
 	<a href="<?php echo url_for('default/index'); ?>"><?php echo 'Inicio Administración'; ?>
 	</a>
 </div>
-<div id="menus">
+<!--<div id="menus">
 	<div class="selector-menu-lateral" id="plegado-menu1">
 		<ul>
 			<li class="sin-seleccionar"><a class="desplegable-menu-lateral"
@@ -44,12 +44,12 @@
 			<li class="sin-type">
 				<ul>
 					<li class="fin-rama"><a class="opcion-menu-lateral" href="#"
-						onclick="enlace('#derecha','<?php echo url_for('default/index') ?>')">Unidades temáticas</a>
+						onclick="enlace('#derecha','<?php // echo url_for('default/index') ?>')">Unidades temáticas</a>
 					</li>
 					<li class="fin-rama"><a class="opcion-menu-lateral" href="#"
-						onclick="enlace('#derecha','<?php echo url_for('contenido/index') ?>')">Contenido web</a></li>
+						onclick="enlace('#derecha','<?php //echo url_for('contenido/index') ?>')">Contenido web</a></li>
                                         <li class="fin-rama"><a class="opcion-menu-lateral" href="#"
-						onclick="enlace('#derecha','<?php echo url_for('programaColegio/index') ?>')">Programa Colegio</a></li>
+						onclick="enlace('#derecha','<?php //echo url_for('programaColegio/index') ?>')">Programa Colegio</a></li>
                                 </ul>
 			</li>
 		</ul>
@@ -57,14 +57,26 @@
 	
 
 
-</div>
+</div>-->
 <div id="sinelementos">
 	<ul>
+           <li><a class="opcion-menu-lateral" href="#" onclick="enlace('#derecha','<?php echo url_for('default/index') ?>')">Unidades temáticas</a>
+		</li>  
+           <li><a class="opcion-menu-lateral" href="#" onclick="enlace('#derecha','<?php echo url_for('comentario/index') ?>')">Comentarios unidad temática</a>
+		</li>                
+           <li><a class="opcion-menu-lateral" href="#" onclick="enlace('#derecha','<?php echo url_for('episodio/indexTodos') ?>')">Episodios</a>
+		</li>            
+           <li><a class="opcion-menu-lateral" href="#" onclick="enlace('#derecha','<?php echo url_for('capitulo/indexTodos') ?>')">Capítulos</a>
+		</li>                      
+           <li><a class="opcion-menu-lateral" href="#" onclick="enlace('#derecha','<?php echo url_for('contenido/index') ?>')">Contenido web</a>
+		</li>     
+           <li><a class="opcion-menu-lateral" href="#" onclick="enlace('#derecha','<?php echo url_for('categoriaContenido/index') ?>')">Categorías Contenido web</a>
+		</li>                  
+           <li><a class="opcion-menu-lateral" href="#" onclick="enlace('#derecha','<?php echo url_for('programaColegio/index') ?>')">Programas Colegio</a>
+		</li>                   
            <li><a class="opcion-menu-lateral" href="#" onclick="enlace('#derecha','<?php echo url_for('contacto/index') ?>')">Contacto</a>
 		</li>
            <li><a class="opcion-menu-lateral" href="#" onclick="enlace('#derecha','<?php echo url_for('usuario/index') ?>')">Usuarios</a>
-		</li>
-           <li><a class="opcion-menu-lateral" href="#" onclick="enlace('#derecha','<?php echo url_for('comentario/index') ?>')">Comentario</a>
 		</li>
            <li><a class="opcion-menu-lateral" href="<?php echo url_for('sf_media_browser/index') ?>">Libreria de archivos</a>
      

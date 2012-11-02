@@ -12,25 +12,46 @@ class fotografiaProductoActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
   {
+             if($request->hasParameter('idProducto')){
+       $this->getUser()->setAttribute('idProducto', $request->getParameter('idProducto'));
+        }
+              //si se pasa la unidad tematica se muestra solo los episodio de el, sino todos
+        if($request->hasParameter('idProducto') or $this->getUser()->hasAttribute('idProducto')){                  
     $this->fotografia_productos = Doctrine_Core::getTable('FotografiaProducto')
       ->createQuery('a')
+      ->where('a.idProducto =?',$this->getUser()->getAttribute('idProducto')) 
       ->execute();
+        }
+        
+    $this->form = new FotografiaProductoForm();
+    $this->form->setDefault('idProducto', $this->getUser()->getAttribute('idProducto'));
+    
+    $this->idProducto=$this->getUser()->getAttribute('idProducto');
+
   }
 
   public function executeNew(sfWebRequest $request)
   {
     $this->form = new FotografiaProductoForm();
+    $this->form->setDefault('idProducto', $this->getUser()->getAttribute('idProducto'));    
   }
 
   public function executeCreate(sfWebRequest $request)
   {
     $this->forward404Unless($request->isMethod(sfRequest::POST));
 
+        $this->fotografia_productos = Doctrine_Core::getTable('FotografiaProducto')
+      ->createQuery('a')
+      ->where('a.idProducto =?',$this->getUser()->getAttribute('idProducto')) 
+      ->execute();
+    
     $this->form = new FotografiaProductoForm();
+    $this->form->setDefault('idProducto', $this->getUser()->getAttribute('idProducto'));
+    $this->idProducto=$this->getUser()->getAttribute('idProducto');
 
     $this->processForm($request, $this->form);
 
-    $this->setTemplate('new');
+    $this->setTemplate('index');
   }
 
   public function executeEdit(sfWebRequest $request)
@@ -52,12 +73,10 @@ class fotografiaProductoActions extends sfActions
 
   public function executeDelete(sfWebRequest $request)
   {
-    $request->checkCSRFProtection();
-
     $this->forward404Unless($fotografia_producto = Doctrine_Core::getTable('FotografiaProducto')->find(array($request->getParameter('id'))), sprintf('Object fotografia_producto does not exist (%s).', $request->getParameter('id')));
     $fotografia_producto->delete();
-
-    $this->redirect('fotografiaProducto/index');
+    
+    $this->redirect('fotografiaProducto/index?idProducto='.$this->getUser()->getAttribute('idProducto'));
   }
 
   protected function processForm(sfWebRequest $request, sfForm $form)
@@ -66,8 +85,8 @@ class fotografiaProductoActions extends sfActions
     if ($form->isValid())
     {
       $fotografia_producto = $form->save();
-
-      $this->redirect('fotografiaProducto/edit?id='.$fotografia_producto->getId());
+      $this->getUser()->setFlash('mensajeSuceso','Imágen guardada.');
+      $this->redirect('fotografiaProducto/index?idProducto='.$this->getUser()->getAttribute('idProducto'));
     }
   }
 }

@@ -1,3 +1,3 @@
-<h1>Edit Comentario</h1>
+<h1>Editar Comentario</h1>
 
 <?php include_partial('form', array('form' => $form)) ?>

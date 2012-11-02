@@ -1,3 +1,3 @@
-<h1>Edit Configuracion</h1>
+<h1>Editar variable de Configuración</h1>
 
 <?php include_partial('form', array('form' => $form)) ?>

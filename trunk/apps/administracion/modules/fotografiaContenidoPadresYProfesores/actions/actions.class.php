@@ -12,25 +12,45 @@ class fotografiaContenidoPadresYProfesoresActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
   {
+             if($request->hasParameter('idContenidoPadresYProfesores')){
+       $this->getUser()->setAttribute('idContenidoPadresYProfesores', $request->getParameter('idContenidoPadresYProfesores'));
+        }
+              //si se pasa la unidad tematica se muestra solo los episodio de el, sino todos
+        if($request->hasParameter('idContenidoPadresYProfesores') or $this->getUser()->hasAttribute('idContenidoPadresYProfesores')){                  
     $this->fotografia_contenido_padres_y_profesoress = Doctrine_Core::getTable('FotografiaContenidoPadresYProfesores')
       ->createQuery('a')
+      ->where('a.idContenidoPadresYProfesores =?',$this->getUser()->getAttribute('idContenidoPadresYProfesores')) 
       ->execute();
+        }
+        
+    $this->form = new FotografiaContenidoPadresYProfesoresForm();
+    $this->form->setDefault('idContenidoPadresYProfesores', $this->getUser()->getAttribute('idContenidoPadresYProfesores'));
+    
+    $this->idContenidoPadresYProfesores=$this->getUser()->getAttribute('idContenidoPadresYProfesores');
+      
   }
 
   public function executeNew(sfWebRequest $request)
   {
     $this->form = new FotografiaContenidoPadresYProfesoresForm();
+    $this->form->setDefault('idContenidoPadresYProfesores', $this->getUser()->getAttribute('idContenidoPadresYProfesores'));    
   }
 
   public function executeCreate(sfWebRequest $request)
   {
     $this->forward404Unless($request->isMethod(sfRequest::POST));
-
+    
+    $this->fotografia_contenido_padres_y_profesoress = Doctrine_Core::getTable('FotografiaContenidoPadresYProfesores')
+      ->createQuery('a')
+      ->where('a.idContenidoPadresYProfesores =?',$this->getUser()->getAttribute('idContenidoPadresYProfesores')) 
+      ->execute();    
+  
     $this->form = new FotografiaContenidoPadresYProfesoresForm();
-
+    $this->form->setDefault('idContenidoPadresYProfesores', $this->getUser()->getAttribute('idContenidoPadresYProfesores'));    
+    $this->idContenidoPadresYProfesores=$this->getUser()->getAttribute('idContenidoPadresYProfesores');
     $this->processForm($request, $this->form);
 
-    $this->setTemplate('new');
+    $this->setTemplate('index');
   }
 
   public function executeEdit(sfWebRequest $request)
@@ -52,12 +72,10 @@ class fotografiaContenidoPadresYProfesoresActions extends sfActions
 
   public function executeDelete(sfWebRequest $request)
   {
-    $request->checkCSRFProtection();
-
     $this->forward404Unless($fotografia_contenido_padres_y_profesores = Doctrine_Core::getTable('FotografiaContenidoPadresYProfesores')->find(array($request->getParameter('id'))), sprintf('Object fotografia_contenido_padres_y_profesores does not exist (%s).', $request->getParameter('id')));
     $fotografia_contenido_padres_y_profesores->delete();
 
-    $this->redirect('fotografiaContenidoPadresYProfesores/index');
+    $this->redirect('fotografiaContenidoPadresYProfesores/index?idContenidoPadresYProfesores='.$fotografia_contenido_padres_y_profesores->getIdContenidoPadresYProfesores());
   }
 
   protected function processForm(sfWebRequest $request, sfForm $form)
@@ -66,8 +84,8 @@ class fotografiaContenidoPadresYProfesoresActions extends sfActions
     if ($form->isValid())
     {
       $fotografia_contenido_padres_y_profesores = $form->save();
-
-      $this->redirect('fotografiaContenidoPadresYProfesores/edit?id='.$fotografia_contenido_padres_y_profesores->getId());
+      $this->getUser()->setFlash('mensajeSuceso','Imágen guardada.');
+      $this->redirect('fotografiaContenidoPadresYProfesores/index?idContenidoPadresYProfesores='.$fotografia_contenido_padres_y_profesores->getIdContenidoPadresYProfesores());
     }
   }
 }

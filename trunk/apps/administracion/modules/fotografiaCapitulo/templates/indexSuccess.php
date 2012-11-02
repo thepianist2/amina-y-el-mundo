@@ -1,36 +1,132 @@
-<h1>Fotografia capitulos List</h1>
+<?php use_stylesheets_for_form($form) ?>
+<?php use_javascripts_for_form($form) ?>
 
-<table>
-  <thead>
-    <tr>
-      <th>Id</th>
-      <th>Id capitulo</th>
-      <th>Descripcion</th>
-      <th>Fotografia</th>
-      <th>Solo acceso premium</th>
-      <th>Solo acceso logado</th>
-      <th>Borrado</th>
-      <th>Activo</th>
-      <th>Created at</th>
-      <th>Updated at</th>
-    </tr>
-  </thead>
-  <tbody>
-    <?php foreach ($fotografia_capitulos as $fotografia_capitulo): ?>
-    <tr>
-      <td><a href="<?php echo url_for('fotografiaCapitulo/edit?id='.$fotografia_capitulo->getId()) ?>"><?php echo $fotografia_capitulo->getId() ?></a></td>
-      <td><?php echo $fotografia_capitulo->getIdCapitulo() ?></td>
-      <td><?php echo $fotografia_capitulo->getDescripcion() ?></td>
-      <td><?php echo $fotografia_capitulo->getFotografia() ?></td>
-      <td><?php echo $fotografia_capitulo->getSoloAccesoPremium() ?></td>
-      <td><?php echo $fotografia_capitulo->getSoloAccesoLogado() ?></td>
-      <td><?php echo $fotografia_capitulo->getBorrado() ?></td>
-      <td><?php echo $fotografia_capitulo->getActivo() ?></td>
-      <td><?php echo $fotografia_capitulo->getCreatedAt() ?></td>
-      <td><?php echo $fotografia_capitulo->getUpdatedAt() ?></td>
-    </tr>
-    <?php endforeach; ?>
-  </tbody>
-</table>
+<h1 style="text-align: center;">Imágenes del capítulo</h1>
 
-  <a href="<?php echo url_for('fotografiaCapitulo/new') ?>">New</a>
+					<div class="tabla_imagenes">
+					<?php foreach($fotografia_capitulos as $fotografia_capitulo): ?>
+						<div class="caja-imagen" style="">
+                                                    <div onclick="javascript:eliminarImagen('<?php echo url_for('fotografiaCapitulo/delete?id='.$fotografia_capitulo->id) ?>',<?php echo $fotografia_capitulo->id ?>)"
+								style="position: absolute; top: 0px; right: 0px; display: none; color: red; background-color: white;">
+								<?php echo image_tag('/images/iconos/cross.png',array('style' => 'float: right;'))?>
+								<span
+									style="padding-top: 3px; padding-left: 5px; display: block; float: right;">Eliminar</span>
+							</div>
+                                                    
+                                                     <!--<div onclick="javascript:editarImagen('<?php // echo url_for('fotografiaCapitulo/edit?id='.$fotografia_capitulo->id) ?>',<?php // echo $fotografia_capitulo->id ?>)"
+								style="position: absolute; top: 0px; right: 150px; display: none; color: red; background-color: white;">
+								<?php // echo image_tag('/images/iconos/editar.png',array('style' => 'float: left;'))?>
+								<span
+									style="padding-top: 3px; padding-left: 5px; display: block; float: left;">Editar</span>
+							</div>-->
+                                                    
+							<?php echo image_tag('/uploads/'.$fotografia_capitulo->getFotografia(),array('width' => '200', 'id'=> $fotografia_capitulo->id,'class'=>'imagenPiso')); ?>
+						</div>
+						<?php endforeach ?>
+					</div>
+<div id="editar-imagen" style="display: none; z-index: 10; position: absolute; background-color: #3399ff;"></div>
+<br></br><br></br><br></br><br></br><br></br><br></br>
+
+
+
+
+<div id="eliminar-comen" style="display: none;"></div><br></br><br></br><br></br>
+<form action="<?php echo url_for('fotografiaCapitulo/'.($form->getObject()->isNew() ? 'create' : 'update').(!$form->getObject()->isNew() ? '?id='.$form->getObject()->getId() : '')) ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
+<?php if (!$form->getObject()->isNew()): ?>
+<input type="hidden" name="sf_method" value="put" />
+<?php endif; ?>
+  <table>
+    <tfoot>
+      <tr>
+        <td colspan="2">
+          <?php echo $form->renderHiddenFields(false) ?>
+          &nbsp;<a href="<?php echo url_for('capitulo/index') ?>">Volver a la lista</a>
+          <?php if (!$form->getObject()->isNew()): ?>
+            &nbsp;<?php echo link_to('Eliminar', 'fotografiaCapitulo/delete?id='.$form->getObject()->getId(), array('method' => 'delete', 'confirm' => 'Está seguro?')) ?>
+          <?php endif; ?>
+          <input type="submit" value="Subir imágen" />
+        </td>
+      </tr>
+    </tfoot>
+    <tbody>
+      <?php echo $form->renderGlobalErrors() ?>
+      <tr>
+        <th><?php $form['idCapitulo']->renderLabel() ?></th>
+        <td>
+          <?php echo $form['idCapitulo']->renderError() ?>
+          <?php echo $form['idCapitulo'] ?>
+        </td>
+      </tr>
+      <tr>
+        <th><?php echo $form['descripcion']->renderLabel() ?></th>
+        <td>
+          <?php echo $form['descripcion']->renderError() ?>
+          <?php echo $form['descripcion'] ?>
+        </td>
+      </tr>
+      <tr>
+        <th><?php echo $form['fotografia']->renderLabel() ?></th>
+        <td>
+          <?php echo $form['fotografia']->renderError() ?>
+          <?php echo $form['fotografia'] ?>
+        </td>
+      </tr>
+      <tr>
+        <th><?php echo $form['soloAccesoPremium']->renderLabel() ?></th>
+        <td>
+          <?php echo $form['soloAccesoPremium']->renderError() ?>
+          <?php echo $form['soloAccesoPremium'] ?>
+        </td>
+      </tr>
+      <tr>
+        <th><?php echo $form['soloAccesoLogado']->renderLabel() ?></th>
+        <td>
+          <?php echo $form['soloAccesoLogado']->renderError() ?>
+          <?php echo $form['soloAccesoLogado'] ?>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</form>
+<div style="text-align: right;">
+    <a href="<?php echo url_for('capitulo/show?id='.$idCapitulo) ?>"><button style="font-size: 18px;">Finalizar y visualizar</button></a>
+</div>
+<br></br>
+  <script type="text/javascript">
+	$(document).ready(function() {
+		$('.caja-imagen').each(function() {
+			$(this).hover(function() {
+				$(this).addClass('hover-borrar-imagen');
+				$(this).children('div').show();
+			}, function() {
+				$(this).removeClass('hover-borrar-imagen');
+				$(this).children('div').hide();
+			});
+		});
+		
+	});
+        
+        
+            function eliminarImagen(url,idImagen){
+                if (confirm("¿Desea eliminar esta imágen?")) {
+           $('#eliminar-comen').load(url,{},function() {  
+               $('#'+idImagen).hide("slow");
+              
+        }); 
+        
+   }
+ }
+ 
+             function editarImagen(url,idImagen){
+           $('#editar-imagen').load(url,{},function() {  
+               $('#editar-imagen').show("slow");
+              
+        }); 
+ }
+
+
+             function cerrar(){
+               $('#editar-imagen').hide("slow");       
+ }
+</script>
+

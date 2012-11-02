@@ -15,7 +15,7 @@ class defaultActions extends sfActions
     $q = Doctrine_Core::getTable('UnidadTematica')
       ->createQuery('a')
       ->where('a.borrado = ?',0)
-      ->orderBy('a.created_at ASC');
+      ->orderBy('a.created_at DESC');
      
         $this->unidad_tematicas = new sfDoctrinePager('UnidadTematica', 6);
 	$this->unidad_tematicas->setQuery($q);   	
@@ -34,9 +34,8 @@ class defaultActions extends sfActions
         $query = $request->getParameter('query');
        $q = Doctrine_Core::getTable('UnidadTematica')
       ->createQuery('a')
-      ->where('a.titulo LIKE ?','%'.$query.'%')
-      ->where('a.descripcion LIKE ?','%'.$query.'%')     
-      ->andWhere('a.borrado = ?',0)
+      ->where('a.borrado = 0 AND a.titulo LIKE ?','%'.$query.'%')
+      ->orWhere('a.borrado = 0 AND a.descripcion LIKE ?','%'.$query.'%')  
       ->orderBy('a.created_at ASC'); 
      
         $this->unidad_tematicas = new sfDoctrinePager('UnidadTematica', 6);

@@ -12,11 +12,24 @@ class configuracionActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
   {
-    $this->configuracions = Doctrine_Core::getTable('Configuracion')
+    $q = Doctrine_Core::getTable('Configuracion')
       ->createQuery('a')
-      ->execute();
+      ->orderBy('a.variable DESC');
+     
+        $this->configuracions = new sfDoctrinePager('Configuracion', 6);
+	$this->configuracions->setQuery($q);   	
+        $this->configuracions->setPage($this->getRequestParameter('page',1));
+	$this->configuracions->init();
+        //route del paginado
+        $this->action = '@configuracion_index_page';      
   }
-
+  
+    public function executeShow(sfWebRequest $request)
+  {
+    $this->configuracion = Doctrine_Core::getTable('Configuracion')->find(array($request->getParameter('id')));
+    $this->forward404Unless($this->configuracion);
+  }
+  
   public function executeNew(sfWebRequest $request)
   {
     $this->form = new ConfiguracionForm();
@@ -52,12 +65,15 @@ class configuracionActions extends sfActions
 
   public function executeDelete(sfWebRequest $request)
   {
-    $request->checkCSRFProtection();
+//    $request->checkCSRFProtection();
 
-    $this->forward404Unless($configuracion = Doctrine_Core::getTable('Configuracion')->find(array($request->getParameter('id'))), sprintf('Object configuracion does not exist (%s).', $request->getParameter('id')));
-    $configuracion->delete();
+//    $this->forward404Unless($configuracion = Doctrine_Core::getTable('Configuracion')->find(array($request->getParameter('id'))), sprintf('Object configuracion does not exist (%s).', $request->getParameter('id')));
+//    $configuracion->borrado=1;
+//    $configuracion->activo=0;
+//    $configuracion->save();
+//    $this->getUser()->setFlash('mensajeSuceso','Variable de configuración eliminada.');
 
-    $this->redirect('configuracion/index');
+//    $this->redirect('configuracion/index');
   }
 
   protected function processForm(sfWebRequest $request, sfForm $form)
@@ -66,8 +82,11 @@ class configuracionActions extends sfActions
     if ($form->isValid())
     {
       $configuracion = $form->save();
+      $this->getUser()->setFlash('mensajeTerminado','Variable de configuración guardada.');
 
-      $this->redirect('configuracion/edit?id='.$configuracion->getId());
+       $this->redirect('configuracion/index');
+    }else{
+        $this->getUser()->setFlash('mensajeErrorGrave','Porfavor, revise los campos marcados que faltan.');
     }
   }
 }

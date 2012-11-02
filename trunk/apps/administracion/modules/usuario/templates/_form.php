@@ -10,16 +10,23 @@
       <tr>
         <td colspan="2">
           <?php echo $form->renderHiddenFields(false) ?>
-          &nbsp;<a href="<?php echo url_for('usuario/index') ?>">Back to list</a>
+          &nbsp;<a href="<?php echo url_for('usuario/index') ?>">Volver a la lista</a>
           <?php if (!$form->getObject()->isNew()): ?>
-            &nbsp;<?php echo link_to('Delete', 'usuario/delete?id='.$form->getObject()->getId(), array('method' => 'delete', 'confirm' => 'Are you sure?')) ?>
+            &nbsp;<?php echo link_to('Eliminar', 'usuario/delete?id='.$form->getObject()->getId(), array('method' => 'delete', 'confirm' => 'Está seguro?')) ?>
           <?php endif; ?>
-          <input type="submit" value="Save" />
+          <input type="submit" value="Guardar" />
         </td>
       </tr>
     </tfoot>
     <tbody>
       <?php echo $form->renderGlobalErrors() ?>
+       <tr>
+        <th><?php echo $form['imagenPerfil']->renderLabel() ?></th>
+        <td>
+          <?php echo $form['imagenPerfil']->renderError() ?>
+          <?php echo $form['imagenPerfil'] ?>
+        </td>
+      </tr>
       <tr>
         <th><?php echo $form['first_name']->renderLabel() ?></th>
         <td>
@@ -49,20 +56,6 @@
         </td>
       </tr>
       <tr>
-        <th><?php echo $form['algorithm']->renderLabel() ?></th>
-        <td>
-          <?php echo $form['algorithm']->renderError() ?>
-          <?php echo $form['algorithm'] ?>
-        </td>
-      </tr>
-      <tr>
-        <th><?php echo $form['salt']->renderLabel() ?></th>
-        <td>
-          <?php echo $form['salt']->renderError() ?>
-          <?php echo $form['salt'] ?>
-        </td>
-      </tr>
-      <tr>
         <th><?php echo $form['password']->renderLabel() ?></th>
         <td>
           <?php echo $form['password']->renderError() ?>
@@ -70,17 +63,17 @@
         </td>
       </tr>
       <tr>
-        <th><?php echo $form['esPremiun']->renderLabel() ?></th>
+        <th><?php echo $form['confirmaPass']->renderLabel() ?></th>
         <td>
-          <?php echo $form['esPremiun']->renderError() ?>
-          <?php echo $form['esPremiun'] ?>
+          <?php echo $form['confirmaPass']->renderError() ?>
+          <?php echo $form['confirmaPass'] ?>
         </td>
       </tr>
       <tr>
-        <th><?php echo $form['is_active']->renderLabel() ?></th>
+        <th><?php echo $form['esPremium']->renderLabel() ?></th>
         <td>
-          <?php echo $form['is_active']->renderError() ?>
-          <?php echo $form['is_active'] ?>
+          <?php echo $form['esPremium']->renderError() ?>
+          <?php echo $form['esPremium'] ?>
         </td>
       </tr>
       <tr>
@@ -88,41 +81,6 @@
         <td>
           <?php echo $form['is_super_admin']->renderError() ?>
           <?php echo $form['is_super_admin'] ?>
-        </td>
-      </tr>
-      <tr>
-        <th><?php echo $form['last_login']->renderLabel() ?></th>
-        <td>
-          <?php echo $form['last_login']->renderError() ?>
-          <?php echo $form['last_login'] ?>
-        </td>
-      </tr>
-      <tr>
-        <th><?php echo $form['created_at']->renderLabel() ?></th>
-        <td>
-          <?php echo $form['created_at']->renderError() ?>
-          <?php echo $form['created_at'] ?>
-        </td>
-      </tr>
-      <tr>
-        <th><?php echo $form['updated_at']->renderLabel() ?></th>
-        <td>
-          <?php echo $form['updated_at']->renderError() ?>
-          <?php echo $form['updated_at'] ?>
-        </td>
-      </tr>
-      <tr>
-        <th><?php echo $form['groups_list']->renderLabel() ?></th>
-        <td>
-          <?php echo $form['groups_list']->renderError() ?>
-          <?php echo $form['groups_list'] ?>
-        </td>
-      </tr>
-      <tr>
-        <th><?php echo $form['permissions_list']->renderLabel() ?></th>
-        <td>
-          <?php echo $form['permissions_list']->renderError() ?>
-          <?php echo $form['permissions_list'] ?>
         </td>
       </tr>
     </tbody>
