@@ -13,15 +13,17 @@ abstract class BasesfGuardUserFormFilter extends BaseFormFilterDoctrine
   public function setup()
   {
     $this->setWidgets(array(
+      'imagenPerfil'     => new sfWidgetFormFilterInput(),
       'first_name'       => new sfWidgetFormFilterInput(),
       'last_name'        => new sfWidgetFormFilterInput(),
       'email_address'    => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'username'         => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'algorithm'        => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'salt'             => new sfWidgetFormFilterInput(),
-      'password'         => new sfWidgetFormFilterInput(),
-      'esPremiun'        => new sfWidgetFormChoice(array('choices' => array('' => 'yes or no', 1 => 'yes', 0 => 'no'))),
+      'password'         => new sfWidgetFormFilterInput(array('with_empty' => false)),
+      'esPremium'        => new sfWidgetFormChoice(array('choices' => array('' => 'yes or no', 1 => 'yes', 0 => 'no'))),
       'is_active'        => new sfWidgetFormChoice(array('choices' => array('' => 'yes or no', 1 => 'yes', 0 => 'no'))),
+      'borrado'          => new sfWidgetFormChoice(array('choices' => array('' => 'yes or no', 1 => 'yes', 0 => 'no'))),
       'is_super_admin'   => new sfWidgetFormChoice(array('choices' => array('' => 'yes or no', 1 => 'yes', 0 => 'no'))),
       'last_login'       => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate())),
       'created_at'       => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
@@ -31,6 +33,7 @@ abstract class BasesfGuardUserFormFilter extends BaseFormFilterDoctrine
     ));
 
     $this->setValidators(array(
+      'imagenPerfil'     => new sfValidatorPass(array('required' => false)),
       'first_name'       => new sfValidatorPass(array('required' => false)),
       'last_name'        => new sfValidatorPass(array('required' => false)),
       'email_address'    => new sfValidatorPass(array('required' => false)),
@@ -38,8 +41,9 @@ abstract class BasesfGuardUserFormFilter extends BaseFormFilterDoctrine
       'algorithm'        => new sfValidatorPass(array('required' => false)),
       'salt'             => new sfValidatorPass(array('required' => false)),
       'password'         => new sfValidatorPass(array('required' => false)),
-      'esPremiun'        => new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))),
+      'esPremium'        => new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))),
       'is_active'        => new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))),
+      'borrado'          => new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))),
       'is_super_admin'   => new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))),
       'last_login'       => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
       'created_at'       => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
@@ -102,6 +106,7 @@ abstract class BasesfGuardUserFormFilter extends BaseFormFilterDoctrine
   {
     return array(
       'id'               => 'Number',
+      'imagenPerfil'     => 'Text',
       'first_name'       => 'Text',
       'last_name'        => 'Text',
       'email_address'    => 'Text',
@@ -109,8 +114,9 @@ abstract class BasesfGuardUserFormFilter extends BaseFormFilterDoctrine
       'algorithm'        => 'Text',
       'salt'             => 'Text',
       'password'         => 'Text',
-      'esPremiun'        => 'Boolean',
+      'esPremium'        => 'Boolean',
       'is_active'        => 'Boolean',
+      'borrado'          => 'Boolean',
       'is_super_admin'   => 'Boolean',
       'last_login'       => 'Date',
       'created_at'       => 'Date',
