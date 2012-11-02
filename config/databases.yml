@@ -7,4 +7,4 @@ all:
     param:
       dsn:      mysql:host=localhost;dbname=amina
       username: root
-      password: agosto.12
+      password: marchaturka2
