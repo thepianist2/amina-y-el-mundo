@@ -1,3 +1,3 @@
-<h1>New Fotografia capitulo</h1>
+<h1>Nueva Fotografía del capítulo</h1>
 
 <?php include_partial('form', array('form' => $form)) ?>

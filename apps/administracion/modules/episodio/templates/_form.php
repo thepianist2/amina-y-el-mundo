@@ -9,19 +9,20 @@
     <tfoot>
       <tr>
         <td colspan="2">
+            <div class="enlaces-centro">
           <?php echo $form->renderHiddenFields(false) ?>
-          &nbsp;<a href="<?php echo url_for('episodio/index') ?>">Back to list</a>
+          &nbsp;<a href="<?php echo url_for('episodio/index') ?>">Volver a la lista</a>
           <?php if (!$form->getObject()->isNew()): ?>
-            &nbsp;<?php echo link_to('Delete', 'episodio/delete?id='.$form->getObject()->getId(), array('method' => 'delete', 'confirm' => 'Are you sure?')) ?>
+            &nbsp;<?php echo link_to('Eliminar', 'episodio/delete?id='.$form->getObject()->getId(), array('method' => 'delete', 'confirm' => 'Está seguro?')) ?>
           <?php endif; ?>
-          <input type="submit" value="Save" />
+          <input type="submit" value="Guardar" />
+          </div>
         </td>
       </tr>
     </tfoot>
     <tbody>
       <?php echo $form->renderGlobalErrors() ?>
       <tr>
-        <th><?php echo $form['idUnidadTematica']->renderLabel() ?></th>
         <td>
           <?php echo $form['idUnidadTematica']->renderError() ?>
           <?php echo $form['idUnidadTematica'] ?>
@@ -62,19 +63,6 @@
           <?php echo $form['soloAccesoLogado'] ?>
         </td>
       </tr>
-      <tr>
-        <th><?php echo $form['created_at']->renderLabel() ?></th>
-        <td>
-          <?php echo $form['created_at']->renderError() ?>
-          <?php echo $form['created_at'] ?>
-        </td>
-      </tr>
-      <tr>
-        <th><?php echo $form['updated_at']->renderLabel() ?></th>
-        <td>
-          <?php echo $form['updated_at']->renderError() ?>
-          <?php echo $form['updated_at'] ?>
-        </td>
       </tr>
     </tbody>
   </table>

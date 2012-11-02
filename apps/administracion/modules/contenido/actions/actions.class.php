@@ -12,14 +12,25 @@ class contenidoActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
   {
-    $this->contenidos = Doctrine_Core::getTable('Contenido')
+    $q  = Doctrine_Core::getTable('Contenido')
       ->createQuery('a')
-      ->execute();
+       ->where('a.borrado = ?',0)
+      ->orderBy('a.created_at DESC');
+       
+        $this->contenidos = new sfDoctrinePager('Contenido', 6);
+	$this->contenidos->setQuery($q);   	
+        $this->contenidos->setPage($this->getRequestParameter('page',1));
+	$this->contenidos->init();
+        //route del paginado
+        $this->action = '@contenido_index_page';  
   }
 
   public function executeNew(sfWebRequest $request)
   {
     $this->form = new ContenidoForm();
+    $this->form->setDefault('idUsuario', $this->getUser()->getGuardUser()->getId());
+
+    
   }
 
   public function executeCreate(sfWebRequest $request)
@@ -27,11 +38,37 @@ class contenidoActions extends sfActions
     $this->forward404Unless($request->isMethod(sfRequest::POST));
 
     $this->form = new ContenidoForm();
+    $this->form->setDefault('idUsuario', $this->getUser()->getGuardUser()->getId());
 
     $this->processForm($request, $this->form);
 
     $this->setTemplate('new');
   }
+  
+    
+        public function executeBuscar(sfWebRequest $request)
+  {
+                $query = $request->getParameter('query');
+       $q = Doctrine_Core::getTable('Contenido')
+      ->createQuery('a')
+      ->where('a.borrado = 0 AND a.titulo LIKE ?','%'.$query.'%')
+      ->orWhere('a.borrado = 0 AND a.contenido LIKE ?','%'.$query.'%')     
+      ->orderBy('a.created_at ASC'); 
+       
+        $this->contenidos = new sfDoctrinePager('Contenido', 6);
+	$this->contenidos->setQuery($q);   	
+        $this->contenidos->setPage($this->getRequestParameter('page',1));
+	$this->contenidos->init();
+        //route del paginado
+         $this->action = 'contenido/buscar';
+        
+        $this->query = $query;
+        
+        $this->setTemplate('index');
+     
+  }
+  
+  
 
   public function executeEdit(sfWebRequest $request)
   {
@@ -52,10 +89,11 @@ class contenidoActions extends sfActions
 
   public function executeDelete(sfWebRequest $request)
   {
-    $request->checkCSRFProtection();
-
     $this->forward404Unless($contenido = Doctrine_Core::getTable('Contenido')->find(array($request->getParameter('id'))), sprintf('Object contenido does not exist (%s).', $request->getParameter('id')));
-    $contenido->delete();
+    $contenido->borrado=1;
+    $contenido->activo=0;
+    $contenido->save();
+    $this->getUser()->setFlash('mensajeSuceso','Contenido eliminado.');
 
     $this->redirect('contenido/index');
   }
@@ -66,8 +104,39 @@ class contenidoActions extends sfActions
     if ($form->isValid())
     {
       $contenido = $form->save();
+      $this->getUser()->setFlash('mensajeTerminado','Contenido guardado.');
 
-      $this->redirect('contenido/edit?id='.$contenido->getId());
+      $this->redirect('contenido/index');
+    }else{
+     $this->getUser()->setFlash('mensajeErrorGrave','Porfavor, revise los campos marcados que faltan.');
+
     }
   }
+  
+  
+    
+      public function executeShow(sfWebRequest $request)
+  {
+    $this->contenido = Doctrine_Core::getTable('Contenido')->find(array($request->getParameter('id')));
+    $this->forward404Unless($this->contenido);
+  }
+  
+  
+      public function executeSwitchValor(sfWebRequest $request){
+    $this->forward404Unless($contenido = Doctrine_Core::getTable('Contenido')->find(array($request->getParameter('id'))), sprintf('Object contenido does not exist (%s).', $request->getParameter('id')));
+    if($request->getParameter('variable')=='activo'){
+        $contenido->activo=$request->getParameter('valor');
+    }
+    if($request->getParameter('variable')=='soloLogado'){
+        $contenido->soloAccesoLogado=$request->getParameter('valor');
+    }
+    if($request->getParameter('variable')=='soloPremium'){
+        $contenido->soloAccesoPremium=$request->getParameter('valor');
+    }
+    
+    $contenido->save();
+    
+    }
+  
+  
 }

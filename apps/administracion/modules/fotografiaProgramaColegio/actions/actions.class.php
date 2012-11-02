@@ -12,25 +12,47 @@ class fotografiaProgramaColegioActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
   {
+    
+    if($request->hasParameter('idProgramaColegio')){
+       $this->getUser()->setAttribute('idProgramaColegio', $request->getParameter('idProgramaColegio'));
+        }
+              //se le pasa el id del programa colegio correspondiente para que muestre sus fotos
+        if($request->hasParameter('idProgramaColegio') or $this->getUser()->hasAttribute('idProgramaColegio')){                  
     $this->fotografia_programa_colegios = Doctrine_Core::getTable('FotografiaProgramaColegio')
       ->createQuery('a')
+      ->where('a.idProgramaColegio =?',$this->getUser()->getAttribute('idProgramaColegio')) 
       ->execute();
+        }
+        
+    $this->form = new FotografiaProgramaColegioForm();
+    $this->form->setDefault('idProgramaColegio', $this->getUser()->getAttribute('idProgramaColegio'));
+    
+    $this->idProgramaColegio=$this->getUser()->getAttribute('idProgramaColegio');
   }
 
   public function executeNew(sfWebRequest $request)
   {
     $this->form = new FotografiaProgramaColegioForm();
+    $this->form->setDefault('idProgramaColegio', $this->getUser()->getAttribute('idProgramaColegio'));    
+    
   }
 
   public function executeCreate(sfWebRequest $request)
   {
     $this->forward404Unless($request->isMethod(sfRequest::POST));
-
+    
+    $this->fotografia_programa_colegios = Doctrine_Core::getTable('FotografiaProgramaColegio')
+      ->createQuery('a')
+      ->where('a.idProgramaColegio =?',$this->getUser()->getAttribute('idProgramaColegio')) 
+      ->execute();
+    
     $this->form = new FotografiaProgramaColegioForm();
+    $this->form->setDefault('idProgramaColegio', $this->getUser()->getAttribute('idProgramaColegio'));        
+    $this->idProgramaColegio=$this->getUser()->getAttribute('idProgramaColegio');
 
     $this->processForm($request, $this->form);
 
-    $this->setTemplate('new');
+    $this->setTemplate('index');
   }
 
   public function executeEdit(sfWebRequest $request)
@@ -52,12 +74,10 @@ class fotografiaProgramaColegioActions extends sfActions
 
   public function executeDelete(sfWebRequest $request)
   {
-    $request->checkCSRFProtection();
-
     $this->forward404Unless($fotografia_programa_colegio = Doctrine_Core::getTable('FotografiaProgramaColegio')->find(array($request->getParameter('id'))), sprintf('Object fotografia_programa_colegio does not exist (%s).', $request->getParameter('id')));
     $fotografia_programa_colegio->delete();
 
-    $this->redirect('fotografiaProgramaColegio/index');
+    $this->redirect('fotografiaProgramaColegio/index?idProgramaColegio='.$fotografia_programa_colegio->getIdProgramaColegio());
   }
 
   protected function processForm(sfWebRequest $request, sfForm $form)
@@ -66,8 +86,8 @@ class fotografiaProgramaColegioActions extends sfActions
     if ($form->isValid())
     {
       $fotografia_programa_colegio = $form->save();
-
-      $this->redirect('fotografiaProgramaColegio/edit?id='.$fotografia_programa_colegio->getId());
+      $this->getUser()->setFlash('mensajeSuceso','Imágen guardada.');
+      $this->redirect('fotografiaProgramaColegio/index?idProgramaColegio='.$this->getUser()->getAttribute('idProgramaColegio'));
     }
   }
 }

@@ -10,21 +10,21 @@
       <tr>
         <td colspan="2">
           <?php echo $form->renderHiddenFields(false) ?>
-          &nbsp;<a href="<?php echo url_for('elExperto/index') ?>">Back to list</a>
+          &nbsp;<a href="<?php echo url_for('elExperto/index') ?>">Volver a la lista</a>
           <?php if (!$form->getObject()->isNew()): ?>
-            &nbsp;<?php echo link_to('Delete', 'elExperto/delete?id='.$form->getObject()->getId(), array('method' => 'delete', 'confirm' => 'Are you sure?')) ?>
+            &nbsp;<?php echo link_to('Eliminar', 'elExperto/delete?id='.$form->getObject()->getId(), array('method' => 'delete', 'confirm' => 'Está seguro?')) ?>
           <?php endif; ?>
-          <input type="submit" value="Save" />
+          <input type="submit" value="Guardar" />
         </td>
       </tr>
     </tfoot>
     <tbody>
       <?php echo $form->renderGlobalErrors() ?>
       <tr>
-        <th><?php echo $form['idEpisodio']->renderLabel() ?></th>
+        <th><?php $form['idEpisodio']->renderLabel() ?></th>
         <td>
           <?php echo $form['idEpisodio']->renderError() ?>
-          <?php echo $form['idEpisodio'] ?>
+          <?php $form['idEpisodio'] ?>
         </td>
       </tr>
       <tr>
@@ -53,34 +53,6 @@
         <td>
           <?php echo $form['soloAccesoLogado']->renderError() ?>
           <?php echo $form['soloAccesoLogado'] ?>
-        </td>
-      </tr>
-      <tr>
-        <th><?php echo $form['borrado']->renderLabel() ?></th>
-        <td>
-          <?php echo $form['borrado']->renderError() ?>
-          <?php echo $form['borrado'] ?>
-        </td>
-      </tr>
-      <tr>
-        <th><?php echo $form['activo']->renderLabel() ?></th>
-        <td>
-          <?php echo $form['activo']->renderError() ?>
-          <?php echo $form['activo'] ?>
-        </td>
-      </tr>
-      <tr>
-        <th><?php echo $form['created_at']->renderLabel() ?></th>
-        <td>
-          <?php echo $form['created_at']->renderError() ?>
-          <?php echo $form['created_at'] ?>
-        </td>
-      </tr>
-      <tr>
-        <th><?php echo $form['updated_at']->renderLabel() ?></th>
-        <td>
-          <?php echo $form['updated_at']->renderError() ?>
-          <?php echo $form['updated_at'] ?>
         </td>
       </tr>
     </tbody>
