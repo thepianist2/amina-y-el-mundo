@@ -19,14 +19,25 @@ class JuegoEpisodioForm extends BaseJuegoEpisodioForm
       $this->setWidget('idEpisodio', new sfWidgetFormInputHidden());   
       $this->setValidator('idEpisodio', new sfValidatorInteger());  
       $this->setWidget('titulo', new sfWidgetFormInputText(array(), array('size' =>50)));   
-      $this->widgetSchema['archivoFlash'] = new sfWidgetFormInputFile();
+      
       //Validacion de campos
         $this->validatorSchema['archivoFlash'] = new sfValidatorFile(array(
-                    'required' => true,
-                    'path' => sfConfig::get('sf_upload_dir').'/juegoEpisodio',
+                    'required' => false,
+                    'path' => sfConfig::get('sf_upload_dir').'/juegoEpisodio/',
                     'mime_types' => array('application/x-shockwave-flash'),
             
                 ));
+
+      $this->setWidget('archivoFlash', new sfWidgetFormInputFileEditable(array(
+                                      'edit_mode' => (!$this->getObject()->isNew()),
+                                      'file_src' => sfConfig::get('sf_upload_dir').'/juegoEpisodio/'.$this->getObject()->getArchivoFlash(),
+                                      'is_image' => false,
+                                       'with_delete' => false)));
+
+
+      
+      
+
         
                         //campo descripcion
         $this->setWidget('descripcion', new sfWidgetFormTextareaTinyMCE(array(             
@@ -58,4 +69,26 @@ $this->validatorSchema['archivoFlash']->setMessages(array('required' => 'Campo O
      
       
   }
+  
+     /**
+   * no se porque no guarda normal
+   * @param <type> $value
+   * @return <type>
+   */
+  public function updateArchivoFlashColumn($value)
+  {
+$archivoFlash = $this->getValue('archivoFlash');
+//si la variable $image es diferente de null entonces significa que hay otra imagen
+if($archivoFlash!=null){
+      $file = $value->generateFilename();
+      copy($value->getTempName(),sfConfig::get('sf_upload_dir').'/juegoEpisodio/'.$file);
+
+      return $file;
+      //si no es null hay otra imagen y se guarda
+}else{
+    return $this->getObject()->getArchivoFlash();
+}
+}
+
+  
 }
