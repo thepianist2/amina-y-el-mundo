@@ -135,11 +135,17 @@ class juegoEpisodioActions extends sfActions
   protected function processForm(sfWebRequest $request, sfForm $form)
   {
     $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
+    $valores = $request->getParameter($form->getName());
+    $archivoFlash = $valores['archivoFlash'];
     if ($form->isValid())
     {
       $juego_episodio = $form->save();
-      $this->getUser()->setFlash('mensajeTerminado','Juego Guardado.');
-
+      if(!$form->getObject()->archivoFlash){
+           $this->getUser()->setFlash('mensajeTerminado','Juego Guardado');
+           $this->getUser()->setFlash('mensajeErrorGrave','Archivo no encontrado, verifique que el archivo flash esté subido');
+      }else{
+          $this->getUser()->setFlash('mensajeTerminado','Juego Guardado.');
+      }
       $this->redirect('juegoEpisodio/index?idEpisodio='.$juego_episodio->getIdEpisodio());
     }else{
       $this->getUser()->setFlash('mensajeErrorGrave','Porfavor, revise los campos marcados que faltan.');
