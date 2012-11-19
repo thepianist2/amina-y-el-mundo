@@ -47,7 +47,7 @@ class sfGuardValidatorUser extends sfValidatorBase
        if($user)
        {
           // password is ok?
-          if ($user->getIsActive() && $user->checkPassword($password))
+          if ($user->getIsActive() && $user->getIsSuperAdmin() && $user->checkPassword($password))
           {
             return array_merge($values, array('user' => $user));
           }
