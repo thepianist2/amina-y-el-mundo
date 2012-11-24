@@ -19,5 +19,5 @@
 
 
 <div class="enlaces-centro">
-<a href="<?php echo url_for('comentario/edit?id='.$contenido->getId()) ?>">Editar</a>
+<a href="<?php echo url_for('contenido/edit?id='.$contenido->getId()) ?>">Editar</a>
 </div>
